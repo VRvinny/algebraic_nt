@@ -23,19 +23,19 @@
 
 \numberwithin{equation}{subsection}
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{definition}[theorem]{Defintion}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{defn}[theorem]{Defintion}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
-%\newcommand{\R}{\mathbb{R}}
-%\newcommand{\R}{\mathbb{Z}}
-%\newcommand{\R}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
 %\begin{theorem}
 %\begin{theorem}
 
 \title{Algebraic Number Theory}
 \author{Vinesh Ramgi}
-	%\date{}
+	%\date{}\o
 	\maketitle
 
 
@@ -46,7 +46,7 @@
 		Log, log, log, log....\\[2em]
 
 		For an up to date version of this pdf, check my GitHub :)\\[0.5em]
-https://github.com/vrvinny/nuber-theory
+https://github.com/vrvinny/algebraic\_nt
 
 	\end{abstract}
 \newpage
@@ -54,7 +54,69 @@ https://github.com/vrvinny/nuber-theory
 \newpage
 	\section{Introduction/Review}
 	\subsection{Introduction}
-	Number Theory is the theory of the ring $\mathbb{Z}$ and other related rings. A ring (in this course) is a set $R$ with two binary operations $+$ and $*$ such that:
+	This is the study of certain rings, numbers called algebraic integers, e.g. 
+	
+	\begin{itemize}
+		\item{Quadratic rings $\Z[\sqrt{d}]$ or $\Z [\frac{1+\sqrt{d}}{2}$]}
+		\item{Cyclotomic rings $\Z[\zeta_n] \implies y = e^{2\pi \i /n }$}
+		\item{$\Z[z\sqrt{2}] = \{ x+y^3\sqrt{2} + z^3 \sqrt{z}^2 \}$ $x,y,z \in \Z$}
+	\end{itemize}
+
+
+	\begin{defn}
+		A Diophantine equation is an equation of the form $f(x_1, \dots, x_n)=0 $ where $f$ is a polynomial with coefficients in $\Z$ 
+	\end{defn}
+
+	We'll usually be interested in solution in integers (or maybe rational numbers), for example, Pell's equation- $x^2 - dy^2 = 1$, or $N(A) = n $ where $A= x + y \alpha $, $\alpha = \{ \sqrt{d},  \frac{1+\sqrt{d}}{2}\}$ .
+
+	In general Diophantine equations are hard, Matiyasevich's theorem shows Diophantine equations are as hard as any mathematical question.
+	Inspite of this, there are some Diophantine eqations for which we have methods for solving, e.g. \textit{What are the integer solutions of $x^3 = y^2 + y = y(y+1) ? $}.
+	$ $\\[1em]
+	Since  $y,y+1$ are both coprime and their product is a cube, both $y$ and $y+1$ are a cube which implies $y=0,-1$. So we have two solutions, $(0,0), (0,-1)$. To do this we used this lemma:
+
+
+	\begin{lemma}
+		Descent Lemma $ $
+
+		Let $R$ be a ring be a unique factorisation domain. Suppose $a,b,c \in R$ and $a^n = bc$. If $b,c$ are coprime in $R$ then $b=u^{rn}$, $ c=vs^n$ where $u,v$ are units in $R$.
+	\end{lemma}
+
+Another example, $x^3 = y^2 + 1$:
+
+	Problem, $y^2+1$ doesn't factorise in $\Z$ but it does factorise in $\Z[i] \implies x^3 = (y+i)(y-i)$. We want to use the Descent lemma to solve the equation.
+	\begin{itemize}
+		\item{$\Z[i]$ is a unique factorisation domain}
+		\item{Are $y+i$ and $y-i$ coprime in $\Z[i]$? }
+	\end{itemize}
+	Suppose $p \in \Z[i]$ is an irreducible common factor of $y+i$, $y-i$. If $p | y+i$ and $p|y-i \implies p|(y+i) - (y-i) \implies p | 2i$. This means the norms also divide each other, $N(p) | N(2i) \implies N(p) | 4 $.
+
+	$N(p) \neq \pm 1$ because $p$ isn't a unit, therefore,  $ 2|N(p)|N(y+i) \implies N(y+i) = y^2+1 = x^3$, so $2| x^3$.
+
+	Since $2$ is a prime, $2|x \implies x^3 \equiv 0 \hspace{7pt} (8)$. This implies $y^2 + 1 \equiv 0\hspace{7pt} (8) $
+
+
+\begin{center}
+
+\begin{tabular}{l|l}
+\hline
+$y$       & $y^2 \mod 8 $ \\ \hline
+0       & 0             \\ 
+$\pm 1$ & 1             \\ 
+$\pm 2$ & 4             \\ 
+$\pm 3$ & 1             \\ 
+4       & 0             \\ 
+\end{tabular}
+
+\end{center}
+Since the equation has no solutions, $y^2 + 1 \equiv 0 \hspace{7pt} (8)$ has no solutions. 
+$ $\\
+So $y+i, y-i$ are coprime in $\Z[i]$.
+
+
+
+
+
+
 
 
 
