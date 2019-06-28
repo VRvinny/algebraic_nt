@@ -23,13 +23,15 @@
 
 \numberwithin{equation}{subsection}
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{defn}[theorem]{Defintion}
+\newtheorem{defn}[theorem]{Definition}
 \newtheorem{prop}[theorem]{Proposition}
 \newtheorem{cor}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\A}{\alpha}
 %\begin{theorem}
 %\begin{theorem}
 
@@ -54,7 +56,7 @@ https://github.com/vrvinny/algebraic\_nt
 \newpage
 	\section{Introduction/Review}
 	\subsection{Introduction}
-	This is the study of certain rings, numbers called algebraic integers, e.g. 
+		This is the study of certain rings, numbers called algebraic integers, e.g. 
 	
 	\begin{itemize}
 		\item{Quadratic rings $\Z[\sqrt{d}]$ or $\Z [\frac{1+\sqrt{d}}{2}$]}
@@ -113,9 +115,659 @@ $ $\\
 So $y+i, y-i$ are coprime in $\Z[i]$.
 
 
+$\therefore y+1 = uA^3$ with $u \in \Z[i]^\times $, $A \in \Z[i]$ with $u=\pm 1 $ or $\pm i$
+$ $\\[1em]
+So in fact
+\begin{align*}
+	y+i &= (r+si)^3 \hspace{7pt} r,s \in \Z \\
+	& = r^3 + 3ir^2s - 3rs^2 - is^3\\
+	& = r^3 - 3rs^2 + i(3r^2s - s^3)
+\end{align*}
+Organising the terms gives a new Diophantine equation:
+\begin{align*}
+	1= 3r^2s - s^3 && y = r^3 - 3rs^2
+\end{align*}
+We can solve the new equation: 
+$ $\\[1em]
+$1= (3r^2-s^2)s$ $\implies $ $s= \pm 1$
+$ $\\[1em]
+If $s=1 \implies 3r^2 - 1 =1 $ \lightning\\
+If $s=-1 \implies 3r^2 - 1 = -1 \implies r =0 $ \hspace{7pt} so $(r,s) = (0,-1)$
+$ $\\[1em]
+This implies $x=1, y= 0$ so $(1,0)$ is the only solution in integers.
+
+$ $\\[1em]
+This motivates the question: which rings are unique factorisation domains? 
+More specifically which rings of algebraic integers are unique factorisation domains?
+
+\subsection{Definitions and proofs}
+A ring is a set $R$ with two operations $ + $ \& $  \times $. 
+$(R, +)$ is an abelian group with identity element $0$. 
+$\times $ is commutative, associative and has identity 1. 
+$x(y+z) = xy+xz$ $\forall x,y,z \in R$
+$ $\\[1em]
+An element $x \in R$ is:
+\begin{itemize}
+	\item{a unit if $\exists $ $x^{-1} \in R $ such that $xx^{-1} = 1$ }
+	\item{reducible if $x=yz $ where $y,z$ not units}
+	\item{irreducible otherwise}
+\end{itemize}
+For examples, in $\Z$, units are $\pm1$, irreducible elements are $\pm p $ for prime numbers $p$.
+
+\begin{defn}
+	A ring $R$ is an integral domain if $xy=0 \implies x=0$ or $y=0$
+\end{defn}
+\begin{lemma}
+	Cancellation property: If $R$ is an integral domain, if $x \neq 0$ then $xy=xz \implies y=z$
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+	xy =xz &\implies x(y-z) = 0 \text{ and since } x\neq 0\\
+		&\implies y-z =0 \\
+		&\implies y=z
+	\end{align*}
+\end{proof}
+$ $\\
+A ring $R$ is a unique factorisation domain if:
+\begin{itemize}
+	\item{$R$ is an integral domain}
+	\item{If $x \in R$ and $x \neq 0 $ then $x=Up_1 \dots p_r$  with $U \in R^\times $ and $P_i$ irreducible }
+\end{itemize}
+$ $\\
+Suppose $p_1 \dots p_r  = q_1 \dots q_s$ with $p_i, q_i$ irreducible then $r=s$ and we can renumber so that $q_i = Up_i$ with $U \in R^\times$.
+
+The $3^{rd}$ condition is equivalent to if $p \in R$ is irreducible and $p|ab $ then $p| a$ or $p | b$.
+
+\begin{lemma}
+	Descent Lemma: Let $R$ be a UFD (Unique Factorisation Domain) and let $a,b,c \in R$ with $a^n = bc $ and $b,c$ coprime.
+	Then $b = ur^n$ and $c= vs^n$ with $u,v \in R^\times$
+\end{lemma}
+
+
+\begin{proof}
+If $a$ is a unit then $b $ and $c$ are units, so the result is true.
+
+If $a=0$ then $b=0$ or $c=0$.
+
+WLOG assume $b=0 = 1*0^n$. 
+	But $b$ and $c$ are coprime $\implies c$ must be a unit (since it is a common factor of $b$ and $c$.
+
+	In other cases $a = p_1 \dots p_r $ with $p_i $ irreducible. 
+	So 
+	\begin{align*}
+		b &=  \text{(a unit)} * p_1^{s_1} \dots p_r^{s_r} && s_i + t_i = n \forall i\\
+		c &= \text{(a unit)} * p_1^{t_1} \dots p_r^{t_r} 
+	\end{align*}
+But we're assuming $b,c$ are coprime so:\\
+$\implies $ each $s_i $ is either 0 or $n$ \\
+	$\implies  b = $ (a unit) * (some $n^{th}$ power)  
+	$\implies  c = $ (a unit) * (some $n^{th}$ power)  
+\end{proof}
+$ $\\
+\textbf{Reminder about quadratic rings}\\
+Let $d\neq 1$ be a square free integer and $\Z[\alpha] = \{ x+y\alpha : x,y \in \Z \}$
+	\begin{equation*}
+\alpha = \alpha_d = 
+	\begin{cases}
+		\sqrt{d} & d\not \equiv 1 \hspace{7pt} (4) \\
+		\cfrac{1+\sqrt{d}}{2} & d \equiv 1 \hspace{7pt} (4)
+	\end{cases}
+	\end{equation*}
+
+If $A = x+y\sqrt{d}$ then $\bar A = x-y \sqrt{d} $ and $N(A) = A \bar A = x^2 - dy^2 $.
+
+Similarly $N(x+y\frac{1+\sqrt{d}}{2}) = x^2 +xy+ \frac{1-d}{4}y^2$.
+$ $\\[1em]
+The ring $\Z[\alpha]$ is norm-Euclidean if for all $A, B \in \Z[\alpha]$ iwht $B \neq 0$, $ \exists Q, R \in \Z[\alpha]$ such that $A=QB+R$ and $|N(R)| < |N(B)|$.
+
+\begin{prop}
+	If $\Z[\alpha]$ is norm-Euclidean then $\Z[\alpha]$ is a UFD.
+\end{prop}
+\begin{proof}
+	(Sketch)\\
+	We'll show that if $p \in \Z[\alpha]$ is irreducible and $p|AB$ then $p|A$ or $p|B$.\\
+	If $p \not | A $ then $ hcf(A,P) = 1 \implies 1 = HA+KP$ by the Euclidean algorithm.\\
+	$B = \underbrace{HAB}_\text{multiple of $p$} +\underbrace{KPB}_\text{multiple of $p$}$ $\implies p | B$
+\end{proof}
+
+\begin{theorem}
+	Disappointing Theorem: $\Z[\alpha_d] $ is norm-Euclidean in the following cases $d = 2,3,5,13,-1,-2,-3,-7,-11$.
+	Conjecturally there are infinitely many real quadratic rings which are UFD.
+\end{theorem}
+
+\section{Materials from other courses on rings, ideals and fields}
+Mainly from Galois Theory, Commutative Algebra and Groups and Rings. 
+In this course, 
+
+\begin{itemize}
+	\item{All rings are commutative with 1}
+	\item{A field is a ring with $1 \neq 0$}
+	\item{If $x\neq 0$, $x$ is a unit }
+\end{itemize}
+
+\begin{defn}
+An ideal $I$ in a ring $R$ is a subset of $R$ such that:
+
+	\begin{itemize}
+		\item{$(I.+)$ is a subgroup of $R$}
+		\item{$\forall x \in R $, $y \in I$ $\implies xy \in I$}
+	\end{itemize}
+\end{defn}
+$ $\\
+Examples: If $x \in R$ then we define $(x) = \{ xy: y \in R \}$.
+This set $(x)$ is an ideal in $R$.
+
+
+\begin{defn}
+	Ideals of the form $(x)$ are called principal ideals. 
+	$(x)$ is the principle ideal generated by $x$.\\
+	$(x_1, \dots, x_n) = \{x_1y_1 + \dots + x_ny_n : y_i \in R\}$ this is also an ideal.
+\end{defn}
+$ $\\[1em]
+\textbf{E.g.} in $\Z$ $(4,6) = (2)$ and in general $(n,m) = (hcf(n,m))$
+
+\begin{defn}
+A principal ideal domain is an integral domain such that all ideals are principal. A Noetherian ring is a ring in which ideals are finitely generated.
+\end{defn}
+$ $\\[1em]
+To show that $(x_1, \dots, x_n) \subseteq I$, it is equivalent to showing $x_1, \dots, x_n \in I$
+$ $\\
+\textbf{E.g.} in $\Z$ $(4,6) = (2)$
+\begin{proof}
+	\begin{align*}
+		(4,6) \subseteq 2 && (2) \subseteq(4,6) \\
+		4 = 2*2 \in (2) && 2=2*4 + (-1) *6 \in (4,6)\\
+		6 = 2*3 \in (2) 
+	\end{align*}
+\end{proof}
+
+
+\begin{defn}
+A principal ideal domain is an integral domain in whicch every ideal is principal
+\end{defn}
+
+\textbf{E.g.} $\Z$ is a PID 
+
+\begin{proof}
+	Suppose $I \subseteq \Z $ is an ideal.\\[0.5em]
+	If $I=\{0\} $ then $I=(0)$.\\
+	If $I \neq \{0\}$ choose $x \in I$ with $|x|$ as small as possible with $x\neq 0 $.\\[1em]
+	Claim $I=(x) $, $x \in I \implies x \subseteq I$.\\[1em]
+Conversely, suppose $y \in I$ with $ y = qx + r$ such that $|r| < |x| $.
+	This means that $r = y-qx \in I$ $\implies r = 0 \implies y= qx \in (x) $ which means $I\subseteq (x)$.
+\end{proof}
+$ $\\[0em]
+
+\textbf{E.g.} If $\Z[\alpha]$ is a norm-Euclidean quadratic ring then $\Z[\alpha]$ is a PID.
+\begin{proof}
+	Replace $|x|$ by $|N(A)$ for $A \in \Z[\alpha]$.
+\end{proof}
+
+ \textbf{E.g.} If $k$ is a field then $k[x]$ is a PID.
+\begin{proof}
+	Replace $|x|$ by $deg(f)$ for $f \in k[x]$.
+\end{proof}
+\subsection{Quotient Rings}
+Let $I$ be an ideal in $R$, we'll say $x=y \in (I)$ if $x-y \in I$.
+$ $\\[1em]
+$R/I = \{$Congruency classes of elements of $R$$\}$
+
+\begin{lemma}
+	If $x \equiv x'$ $(I)$ and $y \equiv y'$ $(I)$ then $x+y  \equiv x'+y'$ $(I)$ and $xy = x'y'$ $(I)$
+\end{lemma}
+This means we can make $R/I$ into a ring.
+
+\begin{proof}
+If $x-x' \in I$ and $y-y' \in I$ then:
+	\begin{align*}
+		(x+y) - (x'+y')  &= (x-x') + (y-y') \in I \\[2em]
+		xy - x'y' &= xy - xy' + xy' -x'y'\\
+		&= x(y-y') + (x-x')y \in I
+	\end{align*}
+\end{proof}
+$ $\\[-2em]
+\textbf{E.g.} If $R = \Z $, $ I= (n) $ and  $x \equiv x' (I) \Leftrightarrow  x \equiv x' \hspace{7pt}(n) \implies R/i = \Z/n $ 
+\\[1em]
+\textbf{E.g.} If $k$ is a field an $f \in k[x]$ with degree $d$ and $I = (f)$, every element of $k[x]$ is congruent to a unique polynomial of degree $<d$. (The remainder after dividing by $f$).
+$ $\\ 
+$\therefore$  $R/I = \{ a_0 + a_1 + \dots + a_{d-1}x^{d-1} : a_i \in k \}$
+
+\begin{defn}
+Let $R$ and $S$ be rings. 
+A ring homomorphism is a function $\phi : R \rightarrow S$ such that:
+	\begin{itemize}
+		\item{$\phi(x+y) = \phi(x) + \phi(y)$}
+		\item{$\phi(xy) = \phi(x) + \phi(y)$}
+		\item{$\phi(1_R) = 1_S$}
+	\end{itemize}
+	$ $\\
+	$ker(\phi) = \{ x \in R : \phi (x) =0 \}$ and $ker(\phi)$ is an ideal of $R$ (trivial to prove) \\
+	$im(\phi) = \{ \phi(x) : x \in R\}$ and $im(\phi)$ is a subring of $S$
+\end{defn}
+
+
+\subsection{1st Isomorphism Theorem for Rings}
+
+Let $\phi : R \rightarrow S$ be a ring homomorphism. 
+Then there is an isomorphism:
+\begin{align*}
+	R/ker(\phi) \cong im(\phi) \text{ by the mapping } (x\mod ker(\phi)) \rightarrow \phi(x)
+\end{align*}
+
+\subsection{Maximal Ideals}
+
+\begin{defn}
+Let $R$ be a ring.
+An ideal $M \subseteq R$ is maximal if:
+	\begin{itemize}
+		\item{$M \neq R$}
+		\item{If $M \subseteq I \subseteq R $ with $I$ an ideal then $I=M $ or $R$}
+	\end{itemize}
+\end{defn}
+
+
+\begin{prop}
+	Suppose $R$ is a PID, an ideal $(x)$ is maximal if and only if $x$ is irreducible.
+\end{prop}
+\begin{proof}
+Algebra 4
+\end{proof}
+$ $\\[-1em]
+Note that the difference between a field and a ring is that if $x \neq 0$ then $xx^{-1} = 1$ and $1 \neq 0$.
+\begin{prop}
+In any ring $R$, $M$ is maximal if and only if $R/M$ is a field
+\end{prop}
+\begin{proof}
+	$(\implies)$ Assume $M$ is maximal therefore $M \neq R$ and $1 \not \in M$ and $1 \not \equiv 0 \hspace{7pt} (M)$.
+
+
+	Assume $x \not \equiv 0 \hspace{7pt}(M)$, let $I$ be the ideal generated by $M$ and $x$, then $ I \supsetneq M$ which means $I=R$.
+	$ $\\[1em]
+	$I = \{ m + xy : m \in M, y \in R \} \implies 1 = m + xy $ and $ 1 \equiv xy \hspace{7pt}(M)$
+	$ $\\[1em]
+	($\Longleftarrow$) Assume $R/M$ is a field so $1 \not \equiv 0 \hspace{7pt} (M)$.
+
+	$\therefore 1 \not \in M$ so $M \neq R$.
+
+	Suppose $M \subsetneq I$, want to show $I=R$.
+	Choose $x \in I, x \not \in M $ so $x \not \equiv 0 \hspace{7pt }(M)$
+	$ $\\[0.5em]
+	So $\exists y $ such that $xy = \equiv 1 \hspace{7pt} (M) $ and by the definition of existence of $x^{-1}$, $1 \in I \implies I = R$
+\end{proof}
+
+
+\begin{cor}
+	Let $k$ be a field and $f \in k[x]$, then $k[x]/(f)$ is a field if $f$ is irreducible over $k$
+\end{cor}
+\begin{proof}
+	$f $ irreducible $\iff (f) $ is maximal $ \iff k[x]/(f) $ is a field.\\
+	(Polynomial ring is ideal)
+\end{proof}
+
+\subsection{Field extensions}
+\begin{defn}
+If $k $ and $l$ are fields with $k \subseteq l$ then $k$ is a subfield of $l$. 
+
+$l$ is called a field extension of $k$, $e.g.$ $\R \subseteq \C$ 
+\end{defn}
+When $l$ is an extension of $k$, we can think of $l$ as a vector space over $k$.
+
+$ $\\
+\textbf{E.g.} $\C$ has basis $\{1,i\}$ as a vector space over $\R$
+
+The degree of the extension $[l:k]$ is the dimension of $l$ as a vector space over $k$ \\
+\textbf{E.g.} $[\C : \R] = 2$ \\
+\textbf{E.g.} $\Q(i) = \{x+iy : x,y \in \Q \}$
+
+This is an extension of $\Q$ with basis $\{1,i\} $ $\implies [\Q(i) : \Q] = 2$
+$ $\\[0.5em]
+\textbf{E.g.} Let $f \in \Q[x] $ be irreducible $\implies \Q[x] /(f) = \{a_0 + a_1x + \dots a_{d-1}x^{d-1} \} $ is a field.
+
+This is an extension of $\Q$ and has degree $d=deg(f)$.
+
+$\{ 1,x,\dots, x^{d-1} \}$ is a basis, so $[\Q[x]/(f) :\Q] = d = deg(f)$.
+
+$ $\\
+\textbf{Notation: } Let $l$ be an extension of $k$ and let $\alpha \in l$, then:
+
+\begin{defn}
+	$\alpha$ is called "algebraic over $k$" if there exists a non-zero $f \in k[x] $ such that $f(\alpha) = 0$.
+	Otherwise $\alpha$ is transcendental.
+\end{defn}
+$ $\\[-0.5em]
+\textbf{E.g.} $\sqrt{2} $ is algebraic over $\Q$ since it is a root of $x^2 - 2$
+$ $\\[1em]
+For any $\alpha \in l$ $k[\alpha] = \{ g(\alpha) : g \in k[x]\}$, the ring generated by $k$ and $\alpha$.
+$ $\\
+$k(\alpha) = \{ \cfrac{g(\alpha)}{h(\alpha)} : g,h \in k[x], h(\alpha) \neq 0\}$, the field generated by $k$ and $\alpha$.
+
+
+\begin{prop}
+	Let $\alpha$ be algebraic over $k$.
+	Then there is a unique monic polynomial $m(x) \in k[x]$ such that:
+	\begin{itemize}
+		\item{$m(\alpha) = 0 $}
+		\item{$f(\alpha) = 0 \iff m | f$}
+	\end{itemize}
+\end{prop}
+
+$m$ is the only monic irreducible polynomial over $k$ such that $m(\alpha) = 0$.
+
+
+\begin{defn}
+This polynomial is called the minimal polynomial of $\alpha$ over $k$
+\end{defn}
+$ $\\[-0.5em]
+\textbf{E.g.} $i$ is algebraic over $\R$ with minimal polynomial $x^2 + 1$
+
+$i$ is algebraic over $\Q$ with minimal polynomial $x^2 + 1$
+
+$i $ is algebraic over $\C$ with minimal polynomial $x-i$
+
+
+\begin{cor}
+	Let $\alpha$ be algebraic over $k$, then $k[\alpha] = k(\alpha)$, i.e. $k[\alpha]$ is a field and there is an isomorphism 
+	\begin{align*}
+		k[x]/ (m) &\cong k(\alpha)\\
+		(g(x) \mod m) &\mapsto g(\alpha)\\
+		a_0+a_1x +\dots + a_{d-1}x^{d-1} &\mapsto a_0 + a_1\alpha + \dots +a_{d-1}\alpha^{d-1} 
+	\end{align*}
+	where $m$ is the minimal polynomial and has degree $d$.
+\end{cor}
+
+$\{ 1, \alpha, \dots, \alpha^{d-1} \}$ forms a basis for $k(\alpha)$ and $[k(\alpha) : k] = d = deg(m)$
 
 
 
+
+\begin{proof}
+	We have a homomorphism (surjective) $k[x] \to k[\alpha] \implies k[x] / (m) \cong k[\alpha]$ and $g \to g(\alpha) $.
+	(Field because $m$ is irreducible)
+
+	Kernel $= \{ g: g(\alpha) = 0 \} = (m)$, therefore $k[\alpha]= k(\alpha) $ the isomorphism takes $(g(x) \mod m)$ to $g(\alpha)$.
+	$ $\\[1em]
+	 $ \{ 1,x,\dots, x^{d-1} \}$ is a basis for $k[x]/(m) $
+	 $ $\\[1em]
+	 So $ \{ 1,\alpha, \dots, \alpha^{d-1} \}$ is a basis for $k(\alpha)$
+\end{proof}
+$ $\\[-0.5em]
+\textbf{E.g.} $i$ is algebraic over $\R$ with minimal polynomial $x^2 + 1$
+
+
+$ \R[x] /(x^2 + 1) \cong \R(i) = \C$ with the map $a+bx \mapsto a+bi $ $a,b \in \R$
+
+$ $\\[1em]
+Similarly $\Q[x] /(x^2 + 1) \cong \Q(i) $ with $a,b \in \Q$ with the map $ a+bx \mapsto a+bi$
+$ $\\[1em]
+\textbf{E.g.} $\alpha = \sqrt[3]{2}$ This is a root of $x^3 - 2$ and so $\alpha$ is algebraic (over $\Q$).
+
+$\Q[x] / (x^3 -2 ) \cong \Q(\alpha) $ with the mapping $a+bx+cx^2 \mapsto a+b\alpha + c\alpha^2$.
+
+The degree of the extension $[\Q(\alpha) : \Q] = 3$ with $\{1,\alpha, \alpha^2 \}$ a basis for $\Q(\alpha)$ over $\Q$.
+
+\subsection{Finding Minimal Polynomials}
+We need methods to check that a polynomial is irreducible over $\Q$.
+
+\begin{lemma}
+	Gauss Lemma: Suppose $f \in \Z[x]$ and $f=gh \hspace{7pt} g,h \in \Q[x] $, then there exists $c \in Q^\times $ such that $cg$ and $c^{-1} $ are in $\Z[x].$
+\end{lemma}
+
+\begin{lemma}
+	Monic Gauss Lemma: Let $f \in \Z[\alpha]$ be monic, if $f=gh \in \Q[x]$ both monic then $g,h \in \Z[x]$.
+\end{lemma}
+\begin{cor}
+	If $f \in \Z[x] $ is monic the $f$ is irreducible over Q $\iff $ irreducible over $\Q$
+\end{cor}
+
+\begin{cor}
+	Let $f \in \Z[x]$ be monic.
+	Let $\bar f$ be the reduction of $f \mod n $, i.e. $\bar f \in (\Z / n)[x].$
+	If $\bar f$ is irreducible then $f$ is irreducible over $\Z$ and over $\Q$.
+	Note that $n$ doesn't need to be prime
+\end{cor}
+
+
+\subsection{Eisenstein's Criterion}
+ Let $f \in \Z[x]$ and let $p$ be prime.
+Let $f(x) = a_dx^d+ \dots + a_0$, if $p \not | a_d $ and $f(x) \equiv a_dx^d \hspace{7pt} (p)$ and let $ f(0) \not \equiv 0 \hspace{7pt} (p^2) $ then $f $ is irreducible over $\Z/p^2 $ and over $\Q$.
+
+$ $\\
+\textbf{E.g.} $\alpha = 10^\frac{1}{11} \implies \alpha^{11} = 10$.
+
+
+$\alpha $ is a root of $x^{11} - 10$
+
+$x^{11} -10 $ is irreducible by Eisenstein's Criterion (either with $p=2$ or $p=5$)
+
+So $m_\alpha(x) = x^{11}-10 $ 
+$ $\\[1em]
+\textbf{E.g.} $\alpha = 2^{\frac{2}{3}}$
+
+$\alpha^3 = 4$
+
+$\alpha$ is a root of $m(x) = x^3 -4$
+
+To show that $m$ is the minimal polynomial, we must show that $m$ is irreducible.
+
+$m(x+1) = x^3 + 3x^2 +3x-3$
+
+$m(x+1)$ is irreducible by Eisenstein's criterion with $p=3 \implies m(x) $ is irreducible.
+$ $\\[1em]
+\textbf{E.g.} $\alpha = 3^{\frac{2}{3}} $
+
+$\alpha^3 - 9 = 0$
+
+$\alpha$ is a root of $m(x) = x^3 -9 $.
+Note that $deg(m) = [\Q[\alpha):\Q]$.
+To show that $m$ is the minimal polynomial it's sufficient to show that $[\Q(\alpha) : \Q] \geq 3$
+
+$\alpha = 3\beta$ where $\beta = 3^{\frac{1}{3}} = \frac{1}{3}\alpha^2$ so $\beta \in \Q(\alpha) \implies \Q(\beta) \subseteq \Q(\alpha)$
+$ $\\[-0.5em]
+
+$\beta $ has minimal polynomial $x^3 - 3$ (by Eisenstein's criterion)
+$ $\\[-0.5em]
+
+$\therefore [\Q(\beta):\Q] = 3$
+$ $\\[-.5em]
+
+$\therefore m(\alpha)$ has degree $\geq 3$
+$ $\\[-.5em]
+
+$\therefore m_\alpha = x^3 -9$ 
+$ $\\[1em]
+Alternatively suppose $x^3 -9$ factorises over $\Q$.
+By the Monic Gauss lemma, $x^3 -9 = (x-a)(x^2 +bx+c)$.
+By comparing coefficients, $ac=9$, which means $a = \pm 1$ or $\pm 3$ or $\pm 9$ and $a^3 = 9$ because $a$ is a root. \lightning
+$ $\\[1em]
+\textbf{E.g.} $ \alpha = \sqrt{2} + \sqrt{3} $
+\begin{align*}
+	\alpha^2 & = 2+2\sqrt{6} +3 && (\alpha^2 - 5) -24 = 0\\
+	& = 5 + 2\sqrt{6}
+\end{align*}
+
+So $\alpha $ is a root of $m(x) = x^4 - 10x^2 + 1$
+
+Suppose $m(x) = (x-a)(x^3+bx+^2+cx+d) $ with $a,b,c,d \in \Z$
+$ $\\
+
+$a $ is a root of $m$ and $a$ is a factor of $m(0) = 1$ so $a = \pm 1$ which is a contradiction since $m(\pm 1) = -8 \neq 0.$
+
+The other possible factorisation is $m(x) = (x^2 + ax+b)(x^2+cx+d)$.
+Comparing coefficients:
+\begin{align*}
+	0 &= a+c && \\
+	-10 &= b+d+ac && c = -a &&a^2 = 10 \pm 2 = 8 \text{ or } 12 \text{ \lightning} \\ 
+	0 &= ad+bc\\
+	1 &= bd && b=d=\pm 1\\
+\end{align*}
+
+
+\subsection{Roots of Unity}
+Let $n$ be a positive integer. 
+An $n^th$ root of unity is a complex number $\zeta$ such that $\zeta^n = 1$.
+A primitive $n^{th}$ root of unity is an $n^{th}$ root of unity which is not a $d^{th}$ root of unity for any $d<n$.
+
+
+$n^{th}$ root of unity: $e^{2\pi i \frac{a}{n}}$ for $a = 0,1,\dots,n-1$
+
+Primitive $n^{th}$ root of unity $e^{2\pi i \frac{a}{n}}$ for $a \in (\mathbb{Z}/n)^\times$.
+
+There are $\phi(n)$ primitive $n^{th}$ roots of unity.
+$ $\\[1em]
+The $n^{th} $ cyclotomic polynomial is $\Phi_n(x) = \underbrace{\prod}_{\substack{\text{Primitive $n^{th}$} \\ \text{ roots of unity }}} (x - \zeta)$
+
+$deg(\Phi_n(x)) = \phi(n)$
+
+
+
+
+
+\begin{lemma}
+	For any $n$: $\prod_{d|n} \Phi_d(x) = x^n - 1$.
+	We can use this to calculate $\Phi_n$.
+\end{lemma}
+$ $\\
+\textbf{E.g.} If $p$ prime then $\Phi_1(x)\Phi_p(x) = x^p -1 $.
+
+So $\Phi_p(x) = \cfrac{x^p-1}{x-1} = 1+x+\dots + x^{p-1}$
+
+
+
+\begin{cor}
+	$\Phi_n(x)$ has coefficient in $\Z$.
+\end{cor}
+$ $\\[-0.5em]
+\textbf{Remark:} If $\zeta$ is a primitive $n^{th}$ root of unity then $\zeta$ is a root of $\Phi_n$
+\begin{theorem}
+Each $\Phi_n$ is irreducible over $\Q$.
+	So $\Phi_n$ is the minimal polynomial of a primitive $n^{th}$ root of unity.
+\end{theorem}
+
+
+\subsection{Tower Law}
+
+\begin{theorem}
+	Suppose $k \subseteq l \subseteq m $ be fields. Then $[m:k] = [m:l]*[l:k]$
+\end{theorem}
+
+\begin{proof}
+	Sketch: Let $\{ b_1, \dots, b_n \}$ be a basis for $l$ as a vector space over $k$.
+
+	Let $\{c_1, \dots, c_m \}$ be a basis for $m$ over $k$.
+
+	Then $\{ b_i, c_j\}$ s a basis for $m$ over $k$.
+\end{proof}
+$ $\\
+\textbf{E.g.} $\Q \subseteq \Q(\sqrt{2}) \subseteq \Q(\sqrt{2},\sqrt{3}) $
+$ $\\[-0.5em]
+
+$[\Q(\sqrt{2}) : \Q] = 2 $ and $x^2 - 2$ is the minimal polynomial.
+$ $\\[-0.5em]
+
+The minimal polynomial of $\sqrt{3} $ over $\Q(\sqrt{2})$ is a factor of $x^2 -3$ so degree is 1 or 2.
+
+From the Tower theorem, we know $[\Q(\sqrt{2},\sqrt{3}):\Q] = \cancel{2}$ or $4$.
+$ $\\[-.5em]
+
+$\alpha = \sqrt{2} + \sqrt{3} \in \Q (\sqrt{2}, \sqrt{3})$
+$ $\\[-.5em]
+
+$\Q \underbrace{\subseteq}_{\substack{\text{deg 4 since } \\ \text{$\alpha$ has} \\ \text{ minimal} \\ \text{polynomial}\\ \text{$x^4 -10x^2 + 1$} }} \Q(\sqrt{\alpha}) \subseteq \Q(\sqrt{2},\sqrt{3}) $
+$ $\\
+
+By the Tower law $[\Q(\sqrt{2},\sqrt{3}): \Q]$ is a multiple of 4.
+$ $\\[-.5em]
+
+$ \therefore [\Q(\sqrt{2},\sqrt{3}): \Q] = 4$
+$ $\\[-.5em]
+
+$ \therefore [\Q(\sqrt{2},\sqrt{3}): \Q(\sqrt{2}] = 2$
+$ $\\[-0.5em]
+
+$x^2 - 3$ is irreducible over $\Q(\sqrt{2})$
+$ $\\[-0.5em]
+
+Also $ [\Q(\sqrt{2},\sqrt{3}): \Q(\alpha)] = 1$ i.e. $\Q(\sqrt{2},\sqrt{3}): \Q(\alpha)$
+
+$ $\\[-.5em]
+This is an example of:
+
+\subsection{Primitive Element Theorem}
+\begin{theorem}
+	Suppose $k$ is an extension of $\Q$ of finite degree then there exists $\alpha \in k$ such that $k = \Q(\alpha)$
+\end{theorem}
+
+\begin{proof}
+	Sketch: $k$ has only finitely many subfields.
+	Choose an $\alpha \in k$ which is not in any of the proper subfields.
+	$ $\\
+	
+	$\Q (\alpha)$ is not contained in a proper subfield of $k$ but $\Q(\alpha)$ is a subfield of $k$, therefore $\Q(\alpha) = k$.
+\end{proof}
+
+\subsection{Conjugates and Complex Field Embeddings}
+
+Let $\alpha, \beta $ be algebraic numbers.
+Then $\alpha$ and $\beta$ are conjugates if $m_\alpha = m_\beta$. They have the same minimal polynomial over $\Q$.
+$ $\\[1em]
+\textbf{E.g.} $\alpha = i$, $\beta = -i$ both have minimal polynomial $x^2 + 1$.\\
+\textbf{E.g.} $\zeta = e^{2 \pi i \frac{1}{100}} $ This is a conjugate of $\zeta^3$, both have minimal polynomial $\Phi_{100}$.\\
+\textbf{E.g.} $\sqrt{2} + \sqrt{3}$ has conjugates $\pm \sqrt{2} \pm \sqrt{3}$
+
+
+\subsection{Galois Separability Lemma}
+\begin{lemma}
+	If $\alpha$ is algebraic over $\Q$ then $m_{\alpha}(x)$ has no repeated roots in $\C$, i.e. $\alpha$ has exactly $d$ conjugates in $\C$ where $d = deg(m(x)) = [\Q(\alpha) : \Q]$
+\end{lemma}
+
+
+\begin{proof}
+	Suppose $(x-\beta)^2$ $|$ $ m_\alpha(x) $ where $m_\alpha$ is the minimal polynomial of $\beta$ over $\Q$.
+
+	If $(x-\beta)$ $ | $ $ m_\alpha$ then $\alpha - \beta $ $ | $ $ m_\alpha '(x) $ but $m_\alpha'$ has smallest degree than $m_a$. \lightning
+
+
+\end{proof}
+
+\begin{defn}
+	An algebraic number field is an extension $k \supseteq \Q$ with $[k: \Q]$
+\end{defn}
+$ $\\[-0.5em]
+By the primitive element theorem $k = \Q (\alpha)$ for some $\alpha \in k$ so $k \cong \Q[x] /(m) $ when $m$ is the minimal polynomial of $\alpha$ and $ deg(m) = [k: \Q]$.
+The polynomial has exactly $d$ roots in $\C$ where $d= deg(m)$. 
+Call these roots $\alpha_1, \alpha_d$. 
+Each $\A_i$ has minimal polynomial $m$ over $\Q$.
+$ $\\[1em]
+$\therefore \Q[x] /(m) \cong \Q(\A_i) \subseteq \C$
+$ $\\[-0.5em]
+
+So for each conjugate $\A_i$ of $\A $ in $\C$, there is a field homomorphism:
+\begin{align*}
+	\sigma_i : k &\to \C\\
+	 k &\to \Q[x]/(m) \to \Q(\A_i) \subseteq \C\\
+\end{align*}
+\vspace{-3em}
+\begin{align*}
+	a_0 +a_1\A + \dots + a_{d-1} &\to& a_0+a_1x_1+\dots+a_{d-1}x^{d-1} &\to& a_0+a_1\A_1 + \dots + a_{d-1}\A_i^{d-1} 
+\end{align*}
+
+
+$ \sigma_i (a_0 + \dots + a_{d-1} \A^{d-1}) = a_0 +\dots + a_{d-1}\A_i^{d-1}$
+\begin{prop}
+$\sigma_1, \dots, \sigma_d$ are all the field homomorphisms from $k $ to $\C$
+\end{prop}
+$ $\\[-0.5em]
+\textbf{E.g.} $k = \Q(\sqrt{2})$
+
+The conjugates of $\sqrt{2}$ in $\C$ are $\pm 2$. 
+$\A_1 = \sqrt{2}$,
+$\A_2 = -\sqrt{2}$
+\begin{align*}
+	\sigma_1(x+y\sqrt{2}) = x +y\sqrt{2} \\
+	\sigma_2(x+y\sqrt{2}) = x - y\sqrt{2}
+\end{align*}
+
+$k = \Q(\A)$ , $m(x) = x^3 - 2$ and $\A_1 = 2^{\frac{1}{3}}$, $\A_2 = 2^{\frac{1}{3}}e^{\frac{2\pi i}{3}} ,\A_3 = 2^{\frac{1}{3}} e^{\frac{4\pi i }{3}}$
 
 
 
