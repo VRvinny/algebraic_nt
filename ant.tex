@@ -38,6 +38,8 @@
 \newcommand{\B}{\beta}
 \newcommand{\G}{\gamma}
 \newcommand{\bba}{\mathcal{B}}
+\newcommand{\dd}{\Delta}
+\newcommand{\ttt}{\theta}
 \title{Algebraic Number Theory}
 \author{Vinesh Ramgi}
 	%\date{}\o
@@ -47,8 +49,7 @@
 \newpage
 	\begin{abstract}
 
-		\centering{What did the number theorist say as he drowned?}\\[1em]
-		Log, log, log, log....\\[2em]
+		\centering{Oof} \\[2em]
 
 		For an up to date version of this pdf, check my GitHub :)\\[0.5em]
 https://github.com/vrvinny/algebraic\_nt
@@ -1461,32 +1462,475 @@ Eventually this process will end with the whole of $\ring_k$ which will be prove
 	After multiplying $b_i$ by integer, we can assume $b_i \in \ring_k$, $Span_\Z\{b_i\} \subset\Q$
 	\spa
 
-	If $Span_\Z \bba \neq \ring_k$ then we can find an element $\ring \in \ring_k$ with $\ring \not \in Span_\Z \B$.
+	If $Span_\Z \{\bba\} \neq \ring_k$ then we can find an element $\ring \in \ring_k$ with $\ring \not \in Span_\Z \B$.
 	\spa
 
 	Replace some $b_i$ by $\ring$ to get a new basis $\mathcal{C}$ and this new basis is "smaller" than $\mathcal{B}$ but we need to explain what smaller means.
 \end{proof}
 
+\spa
+\textbf{E.g.} $\Q(i)$ \hspace{7pt}  $ \bba = \{1,i\}$ is an integral basis because $\ring_k =\Z[i]$. 
+\spa
+
+If $\bba$ is any basis then we define $\Delta(\bba) = \det(Tr(b_ib_j)) \in \Q$.
+If $\bba \subseteq \ring_k$ then $\Delta\bba \in \Z$.
+\spa
+
+The symmetric matrix $\begin{pmatrix}
+	Tr(b_ib_j)
+\end{pmatrix}$
+ is the matrix of a symmetric bilinear form $k \times k \rightarrow \Q$.
+\spa
+ 
+ $(A, B) \mapsto Tr(AB)$ \hspace{7pt} $A,B \in k$
+ \spa
+
+ $Tr\big((A+xC)B\big) = Tr(AB+xCB) = Tr(AB) + xTr(CB) $ \hspace{7pt} $ x \in \Q$
+
+
+\begin{cor}
+$\dd \bba \neq 0$ if $\bba$ is any basis 
+\end{cor}
+
+\begin{proof}
+	Suppose $\dd \bba = 0 $, so $0$ is an eigenvalue of the matrix of the bilinear form.
+
+	There exists $A \in k $ \hspace{7pt} $ (A\neq 0)$ such that $Tr(AB) = 0 $\hspace{7pt} $\forall B \in k$.
+
+	Let $B = \frac{1}{A}$, thus $Tr(1) = 0$ and $d=0$ \lightning.
+\end{proof}
+
+\begin{cor}
+	Suppose $\bba = \{b_i\}$ $\mathcal{C} = \{c_i\}$ are two bases.
+	Let $M = (m_{ij})$ be the transition matrix i.e. $c_i = \sum_j m_{ij} b_j$ then $\dd \mathcal{C}  = \big(\det(M))\big)^2 \dd\bba$.
+\end{cor}
+
+\begin{proof}
+	Recall from Algebra 3,  $Tr(c_i c_j) = M^T Tr(b_ib_j)M$.
+	\spa
+
+	Take the determinant $\dd \mathcal{C} = \det(M) \dd \bba \det(M) $.
+
+\end{proof}
+\begin{lemma}
+	Let $\bba = \{b_1, \dots, b_d \}$ be a basis for $k/ \Q$ with $\bba \subset \ring_k$.
+	
+	Assume $\bba$ is not an integral basis. Then there is a prime number $p$ with $p | \dd \bba$ and an element:
+	\begin{align*}
+		\theta = \cfrac{x_1b_1 + \dots + x_db_d }{p} &&&& x_i \in \{0,\dots,p-1\} \text{ not all 0}
+	\end{align*}
+	such that $\theta$ is an algebraic integer.
+\end{lemma}
+\spa
+If $x_i \neq 0$ then we can replace $b_i$ by $\theta$ to get a new basis $\mathcal{C}$ and $\dd(\mathcal{C}) = \bigg(\cfrac{x^i}{p}\bigg)^2 \dd \bba$ 
+
+\begin{theorem}
+	There is an integral basis in $k$
+\end{theorem}
+\begin{proof}
+ Choose a basis $\bba \subseteq \ring_k$ with $|\dd \bba|$ as small as possible.
+\spa
+
+	Claim $\bba$ is an integral, suppose not.
+	By the lemma there is a basis $\mathcal{C} \subseteq \ring_k$ such that $\dd \mathcal{C} =  \bigg(\cfrac{x^i}{p}\bigg)^2 \dd \bba$  for $|x_i|<p$.
+\spac
+
+	$| \dd \mathcal{C} | < |\dd \bba|$ \lightning
+
+
+\end{proof}
+
+\spa
+The lemma also give a method for finding an integral basis.
+
+\begin{enumerate}
+	\item{Start off with any basis for $k/\Q$}
+	
+		For example if  $k = \Q(\A)$ we can take $\{1, \A, \dots, \A^{d-1} \}$
+	\item{Multiplying the basis vectors by non-zero integers we can assume $\{ b_1, \dots, b_d\} \subseteq \ring_k$}
+	\item{Calculate $\dd \{ b_1, \dots, b_d\}$}
+
+		For each element $\theta = \cfrac{x_1b_1+\dots, + x_db_d}{p}$ \hspace{7pt}where $x_i \in \{0,\dots, p-1\}$ not all 0, $p$ prime and $p | \dd \bba $
+		\begin{itemize}
+			\item{If $\theta$ is an algebraic integer then replace some $b_i$ by $\theta$ to get a new basis and go back to 3).}
+			\item{If none of the $\theta$ are algebraic integers then $\bba$ is an integral basis.}
+		\end{itemize}
+\end{enumerate}
+\textbf{E.g.} $ k = \Q(\sqrt{5})$ Start with basis $\{1, \sqrt5\}$
+\begin{align*}
+	\dd\{1, \sqrt5\} & = \det \begin{pmatrix}
+		Tr(1*1) & Tr(1*\sqrt5)\\
+		Tr(\sqrt5*1) & Tr(\sqrt5\sqrt5)
+	\end{pmatrix}\\
+	&= \det \begin{pmatrix}
+		2 & 0 \\
+		0 & 10
+	\end{pmatrix}\\ 
+	&= 20 \\
+	&=2^2 *5
+\end{align*}
+
+The only prime whose square divides this is $p=2$.
+\spa
+
+So $\theta = x+y\sqrt5 $\hspace{7pt} $x,y \in \{0,1\}$ not both 0.
+\spa
+
+The following combinations are possible, $\frac{1}{2}, \frac{\sqrt5}2$ and $\frac{1+\sqrt5}2$. Trivially $\frac{1+\sqrt5}2 \in \ring_k$. 
+\spa
+
+So the new basis $\mathcal{C} = \{1, \frac{1+\sqrt5}2\}$ and $\dd(\mathcal{C}) = \frac12^2 \dd \bba = 5$ 
+\spa
+
+There are no primes $p$ such that $p^2 | \bba $. This means there are no more $\theta $ to check $\implies \mathcal{C}$ is an integral basis.
+
+$\ring_k = \{ x+y\A : x,y \in \Z \}$ \hspace{7pt} $ \A = \frac{1+\sqrt5}2.$
+\spa
+
+$Tr(x+y\sqrt5) = 2x$
+
+
+\begin{proof}
+Lemma 3.2.4
+
+	Assume $\bba $ is not an integral basis, then there exists an algebraic integer $\Phi = y_1b_1 + \dots + y_db_d $\hspace{7pt}  $y_i \in \Q$, $y_i$ not all in $\Z$.
+\spa
+
+Let $N$ be the lowest common denominator of $y_1, \dots, y_d$.
+	Replace $\Phi$ by $\frac{N}{p} \Phi$ where $p$ is prime.
+\spa
+
+The denominators are the prime $p$ factor of $N$. 
+\spa
+
+Let $\Psi =  \lfloor y_1 \rfloor b_1 + \dots + \lfloor y_d \rfloor b_d \in \ring_k$.
+\spa
+
+$\theta = \Phi - \Psi \in \ring_k$
+\spa
+
+	The coefficients of $\theta $ are in $[0,1)$, not all 0 and with denominator $p$.
+	\begin{align*}
+		\theta = \cfrac{x_1b_1 + \dots + x_db_d }{p} &&& x_i \in \{0,\dots,p-1\} 
+	\end{align*}
+	
+	Suppose $x_i \neq 0$, let $\mathcal{C}$ be the new basis with $b_i$ replaced by $\theta$.
+
+	The new transition matrix is:
+	\begin{align*}
+		c_1 &= b_1\\
+		c_2 &= b_2\\
+		&\vdots  \\ 
+		c_i &= \frac{x_i}pb_i + \dots + \frac{x_d}pb_d
+		 &&&&&M = 
+		\begin{pmatrix}
+			1&&&\frac{x_1}{p}&&\\
+			&1&&&&\\
+			&&\ddots&\vdots&&\\
+			&&&\frac{x_i}{p}&&\\
+			&&&\vdots&\ddots&&\\
+			&&&\frac{x_d}{p}&&1
+		\end{pmatrix}
+		\text{(0s elsewhere) }\
+		\\
+		&\vdots \\
+		c_d & = b_d
+	\end{align*}
+\spa
+
+	So $\dd \mathcal{C}  = \det(M)^2 \dd \bba = (\frac{x^i}{p})^2 \dd \bba$
+	\begin{align*}
+		p^2 \dd \mathcal{C} = x_i^2 \dd \bba && x_i \in \{1,\dots, p-1 \}, \text{ } x_i \text{ coprime to } p^2 \text{ and } p^2 | \dd \bba
+	\end{align*}
+\end{proof}
+\spa
+We found an integral basis, $1, \frac{1+\sqrt5}{2}$ in $\Q(\sqrt5)$.
+\spac
+We'll see methods which will find an integral basis in $\Q(\A)$.
+
+\textbf{E.g.} $\A^8 - 2 = 0$, we need better methods for calculating discriminants.
+
+\begin{lemma}
+	If $\{b_1, \dots, b_d\}$ is any basis then $\dd \{b_1, \dots, b_d \} = \det \begin{pmatrix}
+		\sigma_1(b_1) &\dots & \sigma_d(b_1)\\
+		\vdots && \vdots\\
+		\sigma_1(b_d) &\dots & \sigma_d(b_d)
+	\end{pmatrix}^2$
+
+	Here $\sigma_1, \dots, \sigma_d : k \mapsto \C $ are field embeddings.
+\end{lemma}
+\textbf{E.g.} $k= \Q(\sqrt{n})$ $n$ not a square
+
+\begin{align*}
+	\dd\{1,\sqrt{n}\} = \det \begin{pmatrix}
+	1&1\\
+		\sqrt{n}&-\sqrt{n}
+	\end{pmatrix}^2 = (-2\sqrt{n})^2 = 4n
+\end{align*}
+
+If $n$ is square free then the only primes to consider in the algorithm is $p=2$. 
+So we'd consider the elements $\frac{1}{2} ,\frac{\sqrt{n}}2, \frac{1+\sqrt{n}}2$.
+
+
+\begin{proof}
+	\begin{align*}
+		&
+		\begin{pmatrix}
+			\sigma_1(b_1) &\dots & \sigma_d(b_1)\\
+			\vdots && \vdots\\
+			\sigma_1(b_d) &\dots & \sigma_d(b_d)
+		\end{pmatrix}
+		\begin{pmatrix}
+			\sigma_1(b_1) &\dots & \sigma_d(b_1)\\
+			\vdots && \vdots\\
+			\sigma_1(b_d) &\dots & \sigma_d(b_d)
+		\end{pmatrix} 
+		\\[2em]
+		& = \begin{pmatrix}
+			\sigma_1(b_1b_1) + \sigma_2(b_1b_1) + \dots \sigma_d(b_1b_1)  &\dots & \sigma_d(b_1b_d) + \dots + \sigma_d(b_1b_d) \\
+			\vdots && \vdots\\
+			\sigma_1(b_db_1) + \dots + \sigma_d(b_db_1) &\dots & \sigma_d(b_db_d) + \dots + \sigma(b_db_d)
+		\end{pmatrix}
+		\\[2em]
+		& =\begin{pmatrix}
+			Tr(b_1b_1)  & \dots & Tr(b_1 b_d)\\
+			\vdots &\ddots& \vdots\\
+			Tr(b_db_1) &\dots & Tr(b_db_d)
+		\end{pmatrix} 
+	\end{align*}
+	Take determinant of both sides $\det (\sigma_i(b_j))^2 = \dd \bba$
+\end{proof}
+\spa
+Next we'll look at $\dd \{1, \A, \A^2, \dots, \A^{d-1} \}$, $k = \Q(\A)$
 
 
 
+\begin{prop}
+	Let $\A_1, \dots, \A_d$ be the conjugate of $\A$ in $\C$. Then $\dd \{1, \dots, \A^{d-1} \} = \displaystyle \prod^{d}_{i,j = 1 \text{ }\\ i<j} (\A_i - \A_j)^2$
+\end{prop}
+
+\begin{proof}
+By the previous lemma
+	\begin{align*}
+		\dd &= \det \begin{pmatrix}
+			\sigma_1(1) &\dots & \sigma_1(\A^{d-1})\\
+			\vdots & \ddots & \vdots \\
+			\sigma_d(1) &\dots & \sigma_d(\A^{d-1})
+		\end{pmatrix}^2 && \sigma_i(\A) = \A_i\\[1em]
+		&= \det \begin{pmatrix}
+			1 & \A_1 & \A_1^2 & \dots & \A_1^{d-1}\\
+			\vdots &\ddots & &&\vdots\\
+			\vdots & &\ddots &&\vdots\\
+			1 & \A_d & \A_d^2 & \dots & \A_d^{d-1}
+		\end{pmatrix}\\[1em]
+		& = \Bigg( \pm \prod^d_{i,j = 1 \text{ }i<j} (\A_i - \A_j)\Bigg)^2
+	\end{align*}
+\end{proof}
+
+\begin{prop}
+	$\dd \{1,\A, \dots, \A^{d-1} \} = (-1)^{\frac{d(d-1)}{2}} N(m'(\A))$ where $m$ is the minimal polynomial of $\A$, $m'(x)$ is the derivative.
+\end{prop}
+\spa
+\textbf{E.g.} Let $k = \Q(\A)$ where $\A^8 - 2 = 0$
+\spa
+
+$m_\A(x) = x^8-2$ \hspace{7pt} (Eisenstein's criterion with $p=2$)
+\spa
+
+$m_\A'(x) = 8x^7$
+\spa
+
+By the proposition:
+\begin{align*}
+	\dd \{1, \A, \dots, \A^7 \} &= (-1)^{\frac{8*7}{2}} N(8\A^7)\\
+	&=  (-1)^{\frac{8*7}{2}} N(8)N(\A)^7\\
+	&= 1 * 8^8 * -2^7\\
+	&= -2^{31}
+\end{align*}
+
+\begin{align*}
+	N(\B) = \det(A_\B) = \begin{pmatrix}
+		8 & & &\\
+		& 8 & &\\
+		&&\ddots & \\
+		&&&8
+	\end{pmatrix} \text{(0}s \text{ elsewhere)}
+\end{align*}
+
+\begin{align*}
+	N(\A) &= \A_1 \dots \A_8\\
+	&= \text{constant term in } m_\A(x) = (x-\A_1) \dots (x-\A_8)\\
+	&= -2 
+\end{align*}
+
+\begin{proof}
+	From the previous proposition:
+	\begin{align*}
+		\dd &= \prod^d_{i,j=1 \text{ } i<j} (\A_i - \A_j)^2\\
+		&= \prod^d_{i,j=1 \text{ } i<j} (\A_i - \A_j)*(\A_j - \A_i)*-1 && \text{\# of terms = } \frac{d(d-1)}{2}\\
+ &= (-1)^\frac{d(d-1)}{2}\prod^d_{i,j=1 \text{ } i\neq j} (\A_i - \A_j)\\
+	\end{align*}
+	
+	$m(x) = (x- \A_1) (x-\A_2) \dots (x-\A_d) $.
+	\spa
+	\begin{align*}
+		m'(x) &= (x-\A_2) \dots (x-\A_d) + (x-\A_1)(x-\A_3)\dots (x-\A_d) + \dots + (x-\A_1) (x-\A_{d-1})\\
+		&= \sum_{i=1}^d \hspace{7pt}\prod_{j \neq i} (x-\A_j)
+	\end{align*}
+	\begin{align*}
+		m'(a_k) = \sum^d_{i=1} \hspace{7pt} \underbrace{\prod_{j\neq i}(\A_k - \A_j) }_{ = 0 \text{ unless } i=k}
+	\end{align*}
+	\begin{align*}
+		N(m'(\A)) &= \prod_i \sigma_i(m'(\A))\\
+		&= \prod_i m'(\A_i)\\
+		&= \prod_i \hspace{7pt} \prod_{j \neq i} (\A_i - \A_j)
+	\end{align*}
+	\spa
+
+	Therefore $\dd = (-1)^\frac{d(d-1)}{2} N(m'(\A))$.
+\end{proof}
+\spa
+\textbf{Note: } $F(x) = \Big(x-\sigma_1(\theta)\Big)\dots \Big(x-\sigma_d(\theta) \Big) = x^d - Tr(\theta)x^{d-1} + \dots + (-1)^d N(\theta)$
+
+\subsection{Quadratic Fields}
+$k = \Q(\sqrt{n}) $ for $n \neq 1$ and square-free.
+
+\begin{theorem}
+	$\ring_k = \Z[\A] $ where $\A \begin{cases}
+		\sqrt{n} & d \not \equiv 1\hspace{7pt} (4)\\
+		\frac{1+\sqrt{n}}2 & d \equiv 1 \hspace{7pt} (4)
+	\end{cases}$, and $\{1, \A \}$ is an integral basis, then
+	\begin{align*}
+		\dd\{1,\A\} = \begin{cases}
+			4n & n \not \equiv 1 \hspace{7pt} (4)\\
+			n & n \equiv 1 \hspace{7pt} (4)\\ 
+		\end{cases}
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	Suppose $n \not \equiv 1 \hspace{7pt} (4) $ and let $\bba  =\{1, \sqrt{n} \}$
+	\begin{align*}
+		\dd \bba &= \det  \begin{pmatrix}
+			\sigma_1(1) & \sigma_1(\sqrt{n})\\
+			\sigma_2(1) & \sigma_2(\sqrt{n})
+		\end{pmatrix}^2
+		\\[1em]
+		&= \det \begin{pmatrix}
+			1 & \sqrt{n}\\
+			1 & -\sqrt{n}
+		\end{pmatrix}\\
+		&= 4n
+	\end{align*}
+
+	In the algorithm we get $p=2$, the only prime whose square divides 4n. 
+\spa
+
+	$\theta = \frac{1}{2}, \frac{\sqrt{n}}{2} $ or $\frac{1+\sqrt{n}}{2}$ 
+\spa
+
+	We know $ \frac{1}{2} \not \in \ring_k$ and $N(\frac{\sqrt{n}}{2}) = -\frac{n}{4} \not \in \Z$ because $n$ is square free so $\frac{\sqrt{n}}{2} \not \in \ring_k $.
+\spa
+
+	Also $N(\frac{1+\sqrt{n}}{2}) = \frac{1}{4}^{-n} \not \in \Z$ so $ \frac{1+\sqrt{n}}{2} \not \in \ring_k $ so $\{1, \sqrt{n} \}$ is an integral basis.
+	\spa
+
+	Suppose  $n \equiv 1 \hspace{7pt} (4) $ so $\frac{1+\sqrt{n}}{2} \in \ring_k$. Then $\bba = \{1, \frac{1+\sqrt{n}}{2} \}$ and $\dd \bba = \det \begin{pmatrix}
+		1 & \frac{1+\sqrt{n}}2\\
+		1 & \frac{1-\sqrt{n}}2
+	\end{pmatrix}= n$ 
+\spa
+
+Since $n$ is square free $\bba $ is an integral basis, there are not primes whose square divides $\dd \bba $.
+
+
+\end{proof}
 
 
 
+\subsection{Cubic Fields}
+Suppose $k$ is a cubic field, i.e. $[k : \Q] = 3$. 
+Let $k = \Q (\A) $ with $m_\A(x) = x^3 + cx^2 +\dots$
+
+If we let $\B = \A + \frac{c}3$ so $k = \Q(\B) $, the minimal polynomial of $\B$ has no $x^2$ term
+\begin{align*}
+	m_\B(x) &= m_\A(x- \frac{c}{3})\\
+	& = (x- \frac{c}{3}^3 + c(x-\frac{c}{3})^2 + \dots\\
+	& = x^3 - cx^2 + \dots +cx^2 + \dots 
+\end{align*}
+Let's assume that the minimal polynomial of $\A$ is $x^3 + ax + b$.
+
+\begin{prop}
+	$\dd \{1, \A, \A^2 \} = -27b^2 - 4a^3$	
+\end{prop}
+\spa
+We can use this to find an integral basis in $k$.
+\spac
+\textbf{E.g.} $m_\A(x) = x^3 + x+ 1$
+\spa
+
+$m(1) \neq 0 $ and $m(-1) \neq 0 $ so $m_\A$ is irreducible.
+\spa
+
+$k = \Q(\A)$ is a cubic field, $\dd \{1, \A, \A^2 \} = -27-4 = -31$.
+\spa
+
+This is square free so $\{ 1, \A, \A^2 \}$ is an integral basis i.e. $\ring_k = \Z[\A]$.
+\spac
+\textbf{E.g.} $m_\A(x) = x^3 -2x + 3.$ 
+\spa
+
+It is irreducible since plugging in $\pm1, \pm 3$ does not give 0.
+\spa
+
+By the proposition $\dd \{ 1, \A, \A^2 \} = -27b^2 - 4a^3 = -243+32=-211$.
+\spa
+
+211 prime so $\{1, \A, \A^2 \}$ is an integral basis i.e. $\ring_k = \Z[\A]$.
+
+\begin{proof}
+	\spac
+
+	$m_\A(x^3) = x^3+ax+b$ and we proved last time that $\dd\{1, \A, \dots, \A^{d-1}\} = (-1)^{\frac{d(d-1)}{2}}N(m'(\A))$.
+\\
+	
+	$m'(x) = 3x^2 + a$
+	\spa
+
+	$\dd \{1, \A, \A^2 \} = -N(3\A^2 + a)$
+	\spa
+
+	Let $\A, \B, \G \in \C$ be the conjugates of $\A$, $m(x) = (x-\A) (x-\B) (x-\G)$.
+\spa
+
+	By comparing coefficients:
+	\begin{itemize}
+		\item{$\A + \B + \G= 0$}
+		\item{$\A\B + \B\G + \G\A = a$}
+		\item{$\A\B\G = -b$}
+	\end{itemize}
+
+	\begin{align*}
+		\dd\{1, \A, \A^2 \} &= -N(3\A^2+a)\\
+		& = -(3\A^2 + a)(3\B^2 + a)(3\G^2 + a)\\
+		& = -(27\A^2\B^2\G^2 + 9a(\A^2\B^2 + \B^2\G^2 + \G^2\A^2) + 3a^2(\A^2 + \B^2 + \G^2 ) + a^3)
+	\end{align*}
+	Using 
+	\begin{align*}
+		\A^2\B^2\G^2 &= b^2\\
+		\A^2  + \B^2 + \G^2 &=\underbrace{\A+\B+\G}_{0} - \underbrace{2(\A\B+ \B\G + \G\A)}_{a} = -2a\\
+		\A^2\B^2 + \B^2\G^2 + \G^2\A^2 &= (\A\B + \B\G + \G\A)^2 - 2(\A\B\B\G + \B\G\G\A + \G\A\A\B ))\\
+		&= a^2 - 2\A\B\G(\A+\B+\G)
+	\end{align*}
+
+	$\dd \{ 1,\A, \A^2 \} = -27b^2 + 9aa^2 + 3a^2(-2a) + a^3 = -27b^2 -4a^3$
+\end{proof}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{prop}
+	Suppose $m_\A(x)$ satisfies Eisenstein's criterion with prime $p$.
+	
+	Let $\ttt$
+\end{prop}
 
 
 
