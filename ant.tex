@@ -32,6 +32,8 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\A}{\alpha}
+\newcommand{\aaa}{\alpha}
+\newcommand{\z}{\zeta}
 \newcommand{\ring}{\mathcal{O}}
 \newcommand{\spa}{$ $\\[-0.5em]}
 \newcommand{\spac}{$ $\\[1em]}
@@ -40,6 +42,16 @@
 \newcommand{\bba}{\mathcal{B}}
 \newcommand{\dd}{\Delta}
 \newcommand{\ttt}{\theta}
+\newcommand{\phh}{\varphi}
+
+
+
+
+
+
+
+
+
 \title{Algebraic Number Theory}
 \author{Vinesh Ramgi}
 	%\date{}\o
@@ -49,7 +61,7 @@
 \newpage
 	\begin{abstract}
 
-		\centering{Oof} \\[2em]
+		\centering{There's definitely mistakes in this but don't blame me if you fail (:} \\[2em]
 
 		For an up to date version of this pdf, check my GitHub :)\\[0.5em]
 https://github.com/vrvinny/algebraic\_nt
@@ -1929,10 +1941,790 @@ By the proposition $\dd \{ 1, \A, \A^2 \} = -27b^2 - 4a^3 = -243+32=-211$.
 \begin{prop}
 	Suppose $m_\A(x)$ satisfies Eisenstein's criterion with prime $p$.
 	
-	Let $\ttt$
+	Let $\ttt = \cfrac{x_0 + x_1\A + \dots+ x_d\A^d}{p}$ for $x_i \in \{0,\dots,p-1\}$ not all 0.
+
+	Then $\ttt$ is not an algebraic integer.
 \end{prop}
 
 
+\begin{proof}
+Assume $\ttt \in \ring_k$, let $x_i$ be the first non-zero coefficient.
+
+	\begin{align*}
+		\ttt = \frac{x_i\A^i + x_{i+1} \A^{i+1} + \dots + x_{d-1} \A^{d-1}}{p}
+	\end{align*}
+	
+	Multiply by $\A^{d-i-1}$:
+	\begin{align*}
+		\A^{d-i-1}\ttt = \cfrac{x_i \A^{d-1} + \text{ multiples of } \A^d }{p}
+	\end{align*}
+	
+	By Eisenstein's criterion $\A^d$ is a multiple of $p$ in $\ring_k$:
+	\begin{align*}
+	\underbrace{\A^{d-i-1} \ttt}_\text{ an algebraic integer} = \frac{x_i\A^{d-1}}{p} + \text{ an algebraic integer}
+	\end{align*}
+
+	$\therefore$ $\frac{x_i \A^{d-1}}{p} $ is an algebraic integer. So $N(\frac{x_i\A^{d-1}}p) \in \Z$.
+\spa
+
+	But $N(\frac{x_i\A^{d-1}}p) = \cfrac{x_i^d N(\A)^{d-1}}{p^d}$ but $x_i \in \{1, \dots, p-1\}$ coprime to $p$.
+
+	Also by Eisenstein's criterion $N(\A)$ is not a multiple of $p^2$, only a multiple of $p$. 
+
+	Therefore $x_i^d N(\A)^{d-1} $ is a multiple of $p^{d-1}$ but not $p^d$. \lightning
+\end{proof}
+\spa
+\textbf{E.g.} Let $k = \Q(\A)$  $\hspace{7pt} \A = 2^{\frac{1}{8}}$ \hspace{7pt} $m(x) = x^8 -2$
+\begin{align*}
+	\dd\{1,\A,\dots, \A^7\} &= (-1)^\frac{d(d-1)}{2} N(m'(\A))\\
+	&= 1* N(8\A^7 ) \\
+	&=8^8 *\underbrace{N(\A)^7}_{-2} \\
+	&= -2^{31}
+\end{align*}
+\textbf{E.g.} Let $k = \Q(\A)$\hspace{7pt} $\A$ has minimal polynomial $m(x) = x^3 + 4x+2$
+\spa
+
+Irreducible by Eisenstein's criterion with $p=2$
+\begin{align*}
+	\dd\{ 1, \A, \A^2 \} &= -27b^2 - 4a^3\\
+	&=-27*4 - 4*64\\
+	& = 2^2 * 7* 13
+\end{align*}
+
+The only prime whose square divides this is $p=2$. Therefore $\{1, \A, \A^2 \}$ is an integral basis i.e. $\ring_k = \Z[\A]$.
+\spac
+\textbf{E.g.} Let $k = \Q(\A) $ with minimal polynomial $m(x) = x^3-2$.
+
+$\dd \{1,\A, \A^2 \} = -27b^2 - 4a^3$. $a=0, b=-2, \A=2^{\frac{1}{3}}$
+\spa
+
+If $p=2,3$ then $p^2 | \dd\{1,\A,\A^2 \}$, by the proposition we can forget about 2.
+\spa
+
+$m(x-1) = x^3-3x^2+3x-3$
+\spa
+
+$m(x+2) = x^3+6x^2 +12x+6$ satisfies Eisenstein's criterion for $p=2,3$
+\spa
+
+$m(x+2) $ is the minimal polynomial of $\A-2 =\B$ and $\dd\{ 1,\B, \B^2\} = \dd\{1,\A,\A^2 \} = -2^3*3^3$
+\spac
+\begin{prop} Suppose $\B = \A+1$ for $x \in \Q$, then $\dd\{1,\B, \B^2, \B^{d-1} \} = \dd\{ 1, \A, \dots, \A^{d-1} \}$ 
+\end{prop}
+
+By the proposition we can forget about $2 $ and $3$, so $\{1,\B,\B^2\}$ is an integral basis.
+
+$\therefore \ring_k = \Z[\B] = \Z[\A-2] = \Z[\A]$
+
+$\therefore \{1,\A,\A^2 \}$ is also an integral basis.
+
+\begin{proof}
+	$m_\B(x) =m_\A(X-x)$.
+
+	By the chain rule:
+	\begin{align*}
+		m_\B(x) &= m_\A(X-x)\\
+		m_\B(\B)&= m_\A'(\B-x) = m_\A'(\A)\\[1em]
+		\dd\{ \B^i \} &= (-1)^\frac{d(d-1)}{2} N(m'_\B(\B)) = \dd\{\A^i\}
+	\end{align*}
+\end{proof}
+
+\subsection{Cyclotomic Fields}
+
+$\zeta = e^{\frac{2 \pi i}{n}}$ is the $n^{th}$ primitive root of unity.
+
+\begin{theorem}
+	The minimal polynomial of $\zeta$ is the cyclotomic polynomial $\Phi_n$ with degree $\phh(n)$.
+\end{theorem}
+
+\begin{proof}
+	Easy to prove when $n$ is a power of a prime. 
+	$\Phi_{n+1} (x)$ will satisfy Eisenstein's criterion.
+	For $n=p^a$:
+
+	\begin{align*}
+		\A^{p-1} &= \prod_{d|p^a} \Phi_d(x)\\
+		&= \underbrace{\Phi_1 \Phi_p \dots \Phi_{p^{a-1}}}_{x^{p^{a-1}}-1} \Phi_{p^a}
+	\end{align*}
+	\begin{align*}
+		\Phi_{p^a}(x) = \frac{x^{p^a}-1}{x^{p^{a-1}}-1} = \underbrace{1 + x^{p^{a-1}} + \dots + x^{(p-1)p^{a-1}}}_{p \text{ terms}}
+	\end{align*}
+	Claim $\Phi_{p^a}(x+1)$ satisfies Eisenstein's criterion with the prime $p$.
+
+	\begin{align*}
+		(x^{p^{a-1}}-1) \Phi_{p^a}(x) &= x^{p^a}-1\\
+		((x+1)^{p^{a-1}}-1)&=(x+1)^{p^a} -1\\
+		(x^{p^{a-1} }+ 1^{p^{a-1}}-1)&\equiv x^{p^a} + 1^{p^a} -1 \hspace{7pt} (p) \textbf{\hspace{7pt}(*)}\\
+		\Phi_{p^a}(x+1) &= x^{p^a - p^{a-1}}\hspace{7pt} (p)
+	\end{align*}
+	\textbf{(*)} Using that in any ring $(a+b)^p \equiv a^p + b^p \hspace{7pt} (p) $ and by induction 
+	\spa
+
+	$(a+b)^{p^n} \equiv a^{p^n} + a^{p^n} + b^{p^n} \hspace{7pt} (p)$
+
+	So all coefficients apart from the leading coefficient are multiples of $p$. Constant coefficient of $\Phi_{p^n}(x+1)$ is $\Phi_{p^a}(1) = 1 + 1^{p^{a-1}} + 1^{2p^{a-1}} + \dots + 1^{(p-1)p^{a-1}} = p$.
+\spa
+
+	This is not a multiple of $p^2$ and so $\Phi_{p^a}(x+1)$ satisfies Eisenstein's criterion.
+
+\end{proof}
+
+
+
+\begin{theorem}
+	Let $k =\Q(\z) $ and $\z=e^{\frac{2 \pi i}{n}}$ then $\ring_k = \Z[\z ]$
+\end{theorem}
+
+\begin{proof}
+Only in the case where $n=p$ is a prime number.
+
+Notation, let $\lambda = \z - 1$.
+
+	Recall that $m_\lambda(x) = \Phi_p(x+1)$ which satisfies Eisenstein's criterion with the prime $p$.
+
+\end{proof}
+\begin{lemma}
+	$N(\z) = 1$, $ N(\lambda) = p$, $ [k:\Q] = p-1$
+\end{lemma}
+
+\begin{proof}
+	Minimal polynomial of $\z$ is $\Phi_p(\A) = 1 + \A + \dots + \A^{p-1} = \frac{x^p -1}{x-1}$
+
+	$N(\z) = (-1)^{p-1} * \Phi_p(0) = 1$
+\spa
+	
+	$[k:\Q] = deg(\Phi_p) = p-1$
+\end{proof}
+
+
+\begin{theorem}
+	Let $k = \Q(\z) $, $\z  = e^{\frac{2 \pi i}{n}}$ then $\ring_k = \Z[\z]$
+\end{theorem}
+\begin{proof}
+When $n$ is prime 
+	\begin{align*}
+		\dd \{1, \lambda, \dots, \lambda^{p-2} \} &= \dd \{ 1, \z, \dots, \z^{p-2} \}  &\text{ by the useful trick }\\
+		& = (-1) ^{\frac{d(d-1)}{2}} N(\Phi'_p(\z))\\
+		& = (-1) ^{\frac{p-1}{2}} N(\Phi'_p(\z))
+	\end{align*}
+
+	\begin{align*}
+		\Phi_p(x) &= \frac{x^p-1}{x-1}\\
+		\Phi_p'(x)&= \frac{px^{p-1}(x-1) - x(x^p-1)}{(x-1)^2} \\[1em]
+		\Phi_p'(\z) &= \frac{p\z^{p-1} \lambda - \overbrace{\z^p - 1}^{0}}{\z^2} \\
+		&= \frac{p\z^{p-1}}{\lambda}
+	\end{align*}
+	\begin{align*}
+		\dd\{1, \z, \dots, \z^{p-2} \} = (-1) ^{\frac{p-1}{2}} \frac{p^{p-1}}p = (-1)^{\frac{p-1}2} p^{p-2}
+	\end{align*}
+
+	The only prime whose square divides this is the prime $p$ but $m_\lambda$ satisfies Eisenstein's criterion with $p$, therefore $\{1, \lambda, \dots, \lambda^{p-2} \}$  is an integral basis.
+
+	So $\ring_k = \Z[\lambda]  = \Z[\z] \implies \{1, \z, \dots, \z^{p-2} \}$ is an integral basis.
+\end{proof}
+\spa
+The proof generalises to the case $n=p^a$ but not to general $n$.
+
+\spa
+\textbf{E.g.} $n=2$ 
+\begin{align*}
+	k &=\Q(\z_{20}) \hspace{150pt} \z_{20} = e^{\frac{2\pi i }{20}}\\
+	 m&=\Q(\z_5) \hspace{150pt} \z_5 =e^{\frac{2 \pi i}{5}} = \z^4_{20}\\
+	 \Q&
+\end{align*}
+We can prove using $\dd \{1, \z_5, \z_5^2, \z_5^3 \}$ that $\{ 1, \z_5, \z_5^2, \z_5^3 \}$ is an integral basis in $m$. 
+We can also define the discriminant of a basis is for k as vector space over $m$.
+
+$\dd_{k/m} \{1, i\} = -4$
+\spac
+\textbf{Useful Trick:} $N(x-\A) = m(x)$
+
+
+\section{Factorisation in Rings of Algebraic Integers}
+Let $k$ be a number field, $\ring_k$ might or might not have unique factorisation but $\ring_k$ has unique factorisation if ideal. 
+
+\spa
+The main tool for splitting factors of elements in $\ring$ is the norm, $N(AB) = N(A)N(B)$.
+
+This shows that $\underbrace{A | B}_\text{in $\ring$} \implies \underbrace{N(A)|N(B)}_\text{in $\Z$} $ 
+
+\begin{prop}
+	For any $A \in \ring$, $A|N(A)$
+\end{prop}
+
+\begin{proof}
+	Want to show that $\frac{N(A)}{A}$ is an algebraic integer.
+\spa
+
+	If $\sigma_1(A) = A$ then $\frac{N(A)}A = \sigma_2(A)\dots\sigma_d(A)$ and each $\sigma_i(A)$ is an algebraic integer so $\frac{N(A)}{A}$ is an algebraic integer.
+\end{proof}
+
+
+\begin{cor}
+	Let $A \in \ring$. Then $A$ is a unit iff $N(A) = \pm 1$
+\end{cor}
+\begin{proof}
+	$(\implies)$ $A$ is a unit $\implies A|1 \implies N(A) | N(1) = 1 \implies N(A) = \pm 1$
+\spa
+
+	$(\Longleftarrow)$ If $N(A) = \pm 1 \implies A| \pm 1 \implies A$ is a unit
+\end{proof}
+
+
+\begin{cor}
+	Let $A \in \ring$. If $N(A) = \pm p $ then $A$ must be irreducible.
+\end{cor}
+
+\begin{proof}
+	Suppose $A= BC$, $N(B)N(C) = \pm p \implies N(B)$, $N(C) = \pm 1$. So $B$ or $C$ is a unit
+\end{proof}
+\spa
+There are also many irreducible elements whose norm is not prime, 
+\spac 
+\textbf{E.g.}
+$\ring = \Z[i]$, $ k = \Q(i)$.
+\spa
+
+Let $p = 2+3i$, $N(p) = 2^2+3^2 = 13$, so $2+3i$ is irreducible by corollary.
+\spac
+\textbf{E.g.} Let $Q=3$, then $N(Q) = 9$ but $Q$ is also irreducible.
+
+This is because there are no elements of norm $3$, $N(x+iy) = x^2+ y^2 = 3$ \lightning
+
+
+
+\begin{prop}
+Let $A \in \ring$ and not a unit, then $A= P_1\dots P_r$ for irreducible elements $P_i$ 
+\end{prop}
+\begin{proof}
+	By induction on $|N(A)|$. If $|N(A)| = 2$ then $A$ is irreducible.
+	\spa
+
+	Suppose true for elements $B$ with $|N(B)<|N(A)|$
+	\spa
+
+	If $A$ is irreducible then we're done, if not then $A=BC$ and $|N(B)<|N(A)|$, $|N(C)<|N(A)|$.
+
+	So $B$ and $C$ factorise into irreducibles hence so does $A$.
+\end{proof}
+\spa
+\textbf{Examples of non unique factorisation}
+
+$k = \Q(\sqrt{-10})$, \hspace{7pt} $-10 \equiv 1 \hspace{7pt} (4) $
+\spa
+
+So $\ring = \Z[\sqrt{-10}] $
+\spa
+
+Note that $10 = 2*5 = \sqrt{10} * \sqrt{-10}$ and $2, 5, \pm 10$ are all irreducible.
+\spa
+
+$N(2) = 4$
+
+$N(5) = 25$
+
+$N(\pm \sqrt{10} ) = \sqrt{-10}*-\sqrt{-10}$ = 10
+\spa
+
+Are there any elements with norm 2 or 5?
+\spa
+
+$N(x+y\sqrt{-10}) = x^2 + 10y^2 \neq \pm 2$ or $\pm 5$
+\spa
+
+$\Z[\sqrt{10}]$ does not have unique factorisation, although 2,5 $\sqrt{-10}$ are all irreducible elements. 
+
+The ideals $(2)$, $(5)$, $(\sqrt{-10})$ all factorise.
+\spa
+
+Although $2$, $\sqrt{-10}$ are coprime as elements and the only common factor is a unit, it's not true that:
+\begin{align*}
+	1 = H*2 + K*\sqrt{-10} \hspace{7pt} \text{for } H,K \in \Z[\sqrt{-10}]
+\end{align*}
+
+i.e. $(2, \sqrt{-10}) \neq \Z[\sqrt{-10}]$
+\spa
+
+Let $ P= (2, \sqrt{-10})$ and $Q = (5, \sqrt{-10})$ 
+
+\begin{align*}
+	P^2  &= (2, \sqrt{-10}) * ( 2, \sqrt{-10}) \hspace{100pt}& Q^2 &=(5, \sqrt{-10})*(5, \sqrt{-10})  \\
+	& = (2*2, 2*\sqrt{-10}, -10)   && = (25, 5\sqrt{-10}, -10 )\\
+	& = (4, -10, 2\sqrt{-10}, 2) &&=(25, 5\sqrt{-10}, -10, 5)\\
+	& = (2) && =(5)
+\end{align*}
+\begin{align*}
+	PQ &= (10, 2\sqrt{-10}, 5, \sqrt{-10} , -10 )\\
+	& = (10, 2\sqrt{-10}, 5, 5\sqrt{-10}, -10 ,\sqrt{-10})\\
+	& = (\sqrt{-10} )
+\end{align*}
+
+Recall $10 = 2*5 = \sqrt{-10} * \sqrt{-10} $ in terms of ideals.
+
+$(10) = (2)(5) = (-\sqrt{10})^2 = P^2 Q^2 = (PQ)^2$ 
+\spac
+Often $\ring$ is not a UFD and not a PID.
+\spac
+
+Instead of factorising elements of $\ring$, we factorise ideals.
+
+\begin{theorem}
+	Let $I$ be a non-zero ideal of $\ring$, then there exists maximal ideals $P_1, \dots, P_r$ of $\ring$ unique up to reordering such that $I= P_1 \dots P_r$.
+\end{theorem}
+\spa
+The proof will involve:
+
+\begin{itemize}
+	\item{The norm of an ideal, this is useful for factorising an ideal}
+	\item{It will also give us a way of proving theorems about ideals by induction}
+\end{itemize}
+
+\begin{defn}
+Let $I \subset \ring$ be a non-zero ideal. 
+	The norm of $I$ is $N(I) = | \ring/I | $
+\end{defn}
+
+\begin{prop}
+	If $I$ is a non-zero ideal of $\ring$ then $N(I)$ is finite.
+\end{prop}
+
+\begin{proof}
+	Choose a non-zero element $\B \in I \implies (\B)  \subseteq I \implies |\ring / (\B) | \geq |\ring / I|$
+\end{proof}
+
+\begin{prop}
+	If $\B \in \ring$ is non-zero then $\underbrace{N\Big((\B)\Big)}_\text{norm of ideal}  = \underbrace{|N(\B)|}_\text{norm of element}$
+\end{prop}
+
+
+\begin{lemma}
+	(From Commutative Algebra)
+
+	Let $A$ be a $d \times d$ matrix with entries in $\Z$ and $\det(A) \neq 0$.
+	Then $| \Z^d /A\Z^d| = |\det(A)|.$
+\end{lemma}
+
+\begin{proof}
+	(Prop 4.8)
+
+	Let $\B$ be an integral basis, this gives us an isomorphisms of additive groups, $\Z^d \cong \ring$.
+
+	\begin{align*}
+		\begin{pmatrix}
+x_1\\
+\vdots\\
+x_d
+		\end{pmatrix} \mapsto x_1b_1 + \dots + x_db_d
+	\end{align*}
+	
+	Multiplication by $\B$ on $\ring$ corresponds to multiplication by $A_\B$ on $\Z^d$ where $A_\B$ is the standard representation with respect to $\B$.
+\spa
+
+	Then $\Z^d / A_\B \Z^d \cong \ring /(\B)$.
+\spa
+
+	So by the lemma:
+	\begin{align*}
+	N\Big((\B)\Big) & = |\ring/ (\B) |\\
+		& = | \Z^d / A_\B \Z^d|\\
+		& = |\det(A_\B) |\\
+		& = |N(\B)|
+	\end{align*}
+\end{proof}
+
+
+\begin{proof}
+	(Sketch of lemma)
+
+	We can do integer row and column operations to $A$ to reduce it to diagonal form.
+	\spa
+
+	$A = PDQ$ \hspace{7pt} $P,Q$ are integer matrices with determinant:
+
+	\begin{align*}
+		D = \begin{pmatrix}
+			e_1&&\\
+			&\ddots&\\
+			&&e_d
+		\end{pmatrix} && P\Z^d &= \Z^d\\
+		&& Q\Z^d &= \Z^d
+	\end{align*}
+
+	\begin{align*}
+		\Z^d / a\Z^d & = \Z^d / PD\underbrace{Q \Z^d}_{\Z^d}\\
+		&= P\Z^d/ PD\Z^d\\
+		&= \Z^d / D\Z^d\\
+		&\equiv \Z/e_1\Z \times \dots \times \Z/e_d\Z\\[1em]
+		|\Z^d / A\Z^d | &= |e_1 \dots e_d|\\
+		&=|\det(D)|\\
+		&= |det(A)|
+	\end{align*}
+\end{proof}
+
+\subsection{Prime ideals and Maximal ideals}
+
+Let $R$ be any commutative ring with 1.
+An ideal $P \subseteq R$ is called a prime ideal if:
+
+\begin{itemize}
+	\item{$P\neq R$}
+	\item{If $xy \in P \implies x \in P $ or $y \in P$}
+\end{itemize}
+\spa
+Recall $R$ is an integral domain if:
+\begin{itemize}
+	\item{$1 \neq 0 $ in $R$}
+	\item{If $xy = 0 $ then $x= 0$ or $y=0$}
+\end{itemize}
+
+
+\begin{prop}
+Let $P$ be an ideal in $R$ then $P$ is prime $\iff$ $R/P$ is an integral domain.
+\end{prop}
+
+\begin{proof}
+	\begin{align*}
+		P \neq R &\iff 1 \in P\\
+		& \iff 1 \neq 0 \hspace{7pt} (P) \hspace{7pt} \text{ 1 and 0 are different in }R/P
+	\end{align*}
+	\begin{align*}
+		xy \equiv 0 \hspace{7pt} (P) \iff xy \in P
+	\end{align*}
+	\begin{align*}
+		x \equiv 0 \hspace{7pt} (P) \text{ or } y \equiv 0 \hspace{7pt} (P) \iff x \in P \text{ or }  y \in P
+	\end{align*}
+\end{proof}
+
+
+\begin{prop}
+Recall $I \subseteq R$ is maximal $\iff R/I$ is a field 
+\end{prop}
+\begin{cor}
+Every maximal ideal is prime
+\end{cor}
+
+\begin{proof}
+Every field is an integral domain.
+\end{proof}
+\spa
+There are prime ideals which are not maximal.
+\spac
+\textbf{E.g.} $(0) \subseteq \Z$ is a prime ideal but not maximal, $\Z/(0) \cong \Z $ which is an integral domain but not a field
+\spac
+\textbf{E.g.} $(x) \subseteq \C[x,y]$ is prime but not maximal, $\C[x,y] /(x) \cong \C[y] $ is an integral domain but not a field.
+
+$f(x,y) \mapsto f(0,y)$
+\spac
+Recall every finite integral domain is a field.
+
+\begin{cor}
+	If $P$ is a prime ideal in $\ring$ then either $P=(0)$ or $P$ is maximal.
+\end{cor}
+\begin{proof}
+	Suppose $P$ is a non-zero prime ideal $\ring_k/P$ is an integral domain and is finite because $N(P)$ is finite.
+
+	Therefore $\ring_k/P$ is a field so $P$ is maximal.
+\end{proof}
+
+\begin{proof}
+	(of proposition)
+
+	Let $R$ be a finite integral domain.
+	Let $x \in R$ with $x\neq 0$.
+
+	The powers $x^n$ are not all distincts.
+\spa
+
+	This implies $x^n = x^{n+m}$ for some $m, n$.
+	\spa
+
+	By the cancellation property $1 = x^m$.
+\spa
+
+	Therefore $x^{m-1}$ is an inverse of $x$.
+\end{proof}
+
+
+\begin{lemma}
+Let $I \subseteq R$ be an ideal, then $I$ is prime iff:
+	\begin{itemize}
+		\item{$I \neq R$}
+		\item{Suppose $JK \subset I$ for ideals $J,K$, then $J \subseteq I$ or $K \subseteq I$}
+	\end{itemize}
+\end{lemma}
+
+
+\begin{defn}
+A prime ideal is one such that:
+
+	\begin{itemize}
+		\item{$I \neq R$}
+		\item{$xy \in I \implies x \in I $ or $y \in I$}
+	\end{itemize}
+\end{defn}										    									    
+\begin{proof}
+	$(\implies)$ 
+	\spa
+
+	Assume $I$ is prime and assume $J \subseteq I$.
+	We'll show that $K \subseteq I$.
+
+	Choose $x \in j $\textbackslash$ I$.
+	\spa
+
+	For $y \in K$ we have $xy \in JK \subseteq I \implies y \in I$.
+	\spac 
+	$(\Longleftarrow)$
+	\spa
+
+	Assume the property of the lemma, suppose $xy \in I$. Then $(x)(y) = (xy) \subseteq I$.
+
+	By the property in the lemma $(x) \subseteq I$ or $(y) \subseteq I$, so $x \in I$ or $y \in I$
+\end{proof}
+\spa							    					    
+\textbf{Remark}: Suppose $M_1, \dots M_r $ and $M'_1, \dots M'_s$ are maximal ideals and $M_1 \dots M_r = M'_1 \dots M'_s $.
+
+Also 
+$M_1 \supset M'_1 \dots M'_s$ but $M_1$ is prime so by the lemma, 
+$M_1 \supseteq M'_i$ for some $i$ and without loss of generality, $M \supseteq M'_1$.
+
+
+\subsection{Fractional Ideals and Unique Factorisation}
+If $M_1\dots M_r = M'_1\dots M'_s$ then $M_1 = M'_i$ for some $i$, we want a way of cancelling ideals in order to prove uniqueness of factorisation.
+To give ideal inverses we need something more general than an ideal.
+
+\begin{defn}
+Let $k$ be a number field, $\ring_k$ the ring of algebraic integers in $k$. A fractional ideal in $k$ is a subset $I \subseteq k $ such that there exists $\B \in \ring$, $\B \neq 0$ such that $\B I$ is an ideal of $\ring$.
+\end{defn}
+\spa
+\textbf{E.g.} If $k \in \Q $\hspace{7pt} $\ring_k =\Z$ the fractional ideals have the form:
+\begin{align*}
+	(x) = \{ xy : y \in \Z \} \text{ with } x \in \Q
+\end{align*}
+
+We can multiply fractional ideals in the same way as ideals.
+\begin{align*}
+	IJ = \{\sum_{i,j} x_iy_j : x_i \in I \hspace{7pt} y_j \in J\}
+\end{align*}
+This is clearly associative and $(1) = \ring_k$ is the identity element.
+
+\subsection{Tricky Lemma}
+\begin{lemma}
+Let $P \subseteq \ring_k$ be a maximal ideal.
+	Then there is a fractional ideal $P^{-1}$ such that:
+	\begin{itemize}
+		\item{If $I$ is any ideal, $I \subseteq P$ then $P^{-1} I $ is also an ideal which has smaller norm than $I$. In other words $P^{-1} I$ is an ideal containing $I$ but not equal to $I$ }
+		\item{$PP^{-1} = (1)$}
+	\end{itemize}
+\end{lemma}
+\spa
+Using this we'll prove some theorems.
+
+\begin{theorem}
+The non-zero fractional ideals form a group with the operation $\times$.
+\end{theorem}
+
+\begin{proof}
+Remains to show that every element has an inverse.
+
+We'll first show that all ideals have inverses. 
+	By induction on $N(I) = 1$ then $I= \ring_k = (1)$.
+\spa
+
+	Assume all ideals with norm smaller than $I$ have inverses.
+	\spa
+
+	Let $P$ be a maximal ideal containing $I$, by the tricky lemma, $P^{-1} I$ is an ideal with norm smaller than $I$.
+\spa
+
+	$P^{-1}I$ has an inverse $J$. $\underbrace{(JP^{-1})}_\text{inverse of $I$} I = (1)$
+
+\spa
+
+	Now let $I$ be any fractional ideal (non-zero). $\B I=J$ is an ideal for non-zero $\B \in \ring_k$. Therefore $J$ has an inverse $J^{-1}$. \hspace{7pt} $\underbrace{\B J^{-1}}_\text{inverse of $I$} I = J^{-1} J = (1)$ 
+
+
+\end{proof}
+		    
+	    
+    \begin{theorem}
+Every non-zero ideal $I \subseteq \ring_k$ can be factorised as $I = P_1 \dots P_r$ with $P_i$ maximal, unique up to reordering.
+    \end{theorem}
+    
+    
+    
+    \begin{proof}
+	    By induction on $N(I)$, if $N(I) = 1 $ then $I=(1) $ so true with $r = 0$.
+
+	    Assume all ideals with smaller norm than $I$ can be factorised into maximal ideals.
+
+	    Let $P$ be a maximal ideal containing I, by the tricky lemma, $P^{-1} I$ is an ideal with smaller norm than $I$.
+	    
+	    Therefore $P^{-1} I = P_1 \dots P_r$ ($P_i$ maximal) and $I = P P_1 \dots P_r$.
+\spac
+	    (Uniqueness of factorisation)
+
+	    By induction on $N(I)$, if $N(I)=1$ then $I= (1)$ and nothing to prove.
+	    
+	    Assume all ideals with smaller norm than $I$ have a unique factorisation.
+
+	    Suppose $I = P_1 \dots P_r = Q_1 \dots Q_s$ for $P_1, Q_i$ maximal.
+\spa
+
+Let $P_1$ be prime and $P_1 \supseteq Q_1 \dots Q_s $. So $P_i \supset Q_i$ for some $i$.
+\spa
+
+Without loss of generality $P_1 \supseteq Q_1$ but $Q_i$ is maximal so $P_1 = Q_1$.
+\spa
+
+	    Multiply the equation by $P_1^{-1} \implies $ $P_1^{-1}I = P_2 \dots P_r = Q_2 \dots Q_s$ 
+\spa
+
+By the tricky lemma, $P_1^{-1} I$ is an ideal with smaller norm than $I$. 
+\spa
+
+	    Therefore $P_1^{-1}$ has only maximal ideals $\implies$ after reordering $P_i = Q_i$ and $r=s$.
+    \end{proof}
+\spa
+A subset $I \subset k$ is a fractional ideal if $I = \B^{-1} J $ for $\B \in \ring_k$, $\B \neq 0$ and $J$ is an ideal.
+
+\spa
+\textbf{E.g.} in $\Q$, $(\frac{1}{2} ) = \{\frac{n}{2}: n \in \Z \}$
+\spac
+\textbf{Remark:} If $I$ is a fractional ideal then $I$ is an ideal $\iff I \subseteq \ring_k$
+\begin{proof}
+	$(\implies)$ trivial
+	\spac
+	$(\Longleftarrow)$ $\B I$ is an ideal so closed under $+$ and scalar multiplication.
+
+	$I$ is closed under $+$, scalar multiplication $\implies I$ is an ideal.
+\end{proof}
+
+
+\begin{defn}
+Let $I,J$ be ideals, we'll say $I| J$ if $J = II'$ for some ideal $I'$
+\end{defn}
+\begin{cor}
+$I|J \iff I \supseteq J$
+\end{cor}
+\begin{proof}
+	$(\implies)$ \hspace{7pt} $ J = II'$ \hspace{7pt}  $I'\subseteq \ring_k$ then $J \subseteq I \ring_k = I$
+\spac
+	$(\Longleftarrow)$ Suppose $I \supseteq J$. 
+	Let $I' = I^{-1} J \implies J = II' $. 
+	Remains to show that $I' \subseteq \ring_k$.
+	\spa
+
+	$J \subseteq I$
+	\spa
+	
+	Therefore $I' = I^{-1}J \subseteq I^{-1} I = (1) = \ring_k$
+	\spa
+
+	$I'$ is an ideal.
+
+\end{proof}
+
+
+\begin{defn}
+	$P^{-1} = \{ x \in k : xP \subset \ring_k\}$
+\end{defn}
+
+Let $\B \in P$, $\B \neq 0$.
+We'll see that $\B P^{-1} \subseteq \ring_k$ and is an ideal.
+\spa
+
+If $x \in P^{-1} $ then $xP \subseteq \ring_k$
+
+$\implies x\B \in \ring$
+
+$\implies \B P^{-1} \subseteq \ring_k$
+\spac
+Let $x,y \in P^{-1} $ and  $\lambda \in \ring_k$, need to check $x+ \lambda y \in P^{-1}$.
+\spac
+Let $\delta \in P$
+ \spac
+ $\implies x \delta \in \ring_k$ and $y \delta \in \ring_k$
+ \spac
+ $\implies x\delta + \lambda y \delta \in \ring_k$
+ \spac
+ $\implies (x+\lambda ) \delta \in \ring_k$
+ \spac
+ $\implies x+ \lambda y \in P^{-1} $
+
+\begin{defn}
+	$P^{-1} = \{ x \in k : xP \subseteq \ring_k \} \implies P^{-1}$ is a fractional ideal.
+\end{defn}
+\spa
+Before proving the tricky lemma we'll need:
+
+\begin{lemma}
+Let $I \subseteq \ring_k $ for $I=0$. Then there exists ideals $P_1, \dots, P_r$ with $I \supseteq P_1 \dots P_r$ 
+\end{lemma}
+
+\begin{proof}
+	By induction on $N(I)$.
+\spa
+
+	If $N(I) = 1$ then $I =  \ring_k$.
+	Assume true for ideals smaller norm than $I$.
+	\spa
+
+	If $I$ is maximal then let $P_i \in I$.
+
+	If $I$ is not maximal then $I$ is no prime. Then there exists $x, y \in \ring_k$, $xy \in I$ and $x \not \in I$, $y \not \in I$.
+\spa
+
+	Let $J = I + (x) $ and $K = I + (y)$
+\spa
+
+These are bigger than $I$ so they have smaller norm.
+\spa
+
+$J \supseteq P_1 \dots P_t$ for $P_i$ maximal
+
+	$K \supseteq P_{i+1}\dots P_r$
+\spa
+
+	Then $JK = \underbrace{I*I}_{\subseteq I} + \underbrace{I*(y)}_{\subseteq I} + \underbrace{I(x)}_{\subseteq I} + \underbrace{(xy)}_{\subseteq I}$
+
+	\spa
+
+	$\implies JK \subseteq I$
+
+	$\implies P_1\dots P_r \subseteq I$
+
+\end{proof}
+\spa
+Note that $P^{-1} \supseteq \ring_k$, if $x \in \ring_k$ then $xP \subseteq \ring_k$ therefore $x \in P^{-1}$.
+
+The first step in the proof of the tricky lemma will be to show that $P^{-1} \supsetneq \ring_k$.
+
+
+
+
+\begin{proof}
+	(Tricky Lemma)
+\spac
+	\textbf{Step 1:} Show that $P^{-1} \supsetneq \ring_k$.
+
+	Choose $a \in P$, $a \neq 0 $ such that $(a) \supseteq P_1, \dots P_r$, by the previous lemma with $P_1, \dots, P_r$ maximal.
+\spa
+
+	We'll do this with $r$ minimal.
+	\spa
+
+	$P_1 \dots P_r \subseteq (a) \subseteq P$
+	\spa
+
+	Since $P$ prime, $P \supseteq P_i$ for some $i$, without loss of generality, $P \supseteq P_r$ but $P_r$ is maximal.
+\spa
+
+	$\implies P= P_r$
+	\spa
+
+	Since $r$ is minimal
+\end{proof}
 
 
 
@@ -1944,6 +2736,53 @@ By the proposition $\dd \{ 1, \A, \A^2 \} = -27b^2 - 4a^3 = -243+32=-211$.
 
 
 
-\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    \end{document}
+
  
 
