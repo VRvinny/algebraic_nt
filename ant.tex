@@ -43,7 +43,7 @@
 \newcommand{\dd}{\Delta}
 \newcommand{\ttt}{\theta}
 \newcommand{\phh}{\varphi}
-
+\newcommand{\ff}{\mathbb{F}}
 
 
 
@@ -2723,66 +2723,497 @@ The first step in the proof of the tricky lemma will be to show that $P^{-1} \su
 	$\implies P= P_r$
 	\spa
 
-	Since $r$ is minimal
+	Since $r$ is minimal $(a) \supsetneq P_1 \dots P_{r-1}$ so we can choose $b \in P_1 \dots P_{r-1}$ for $b \in (a) $.
+	\spa
+	
+	Let $x = \frac{b}{a}$, we'll see that $x \in P^{-1}$ and $x \in \ring_k$.
+	\spa
+
+	$xP =\frac{b}{a}P \subseteq \frac{1}{a}(P_1\dots P_{r-1})P = \frac{1}{a}P_1 \dots P_r \subseteq \frac{1}{a}(a) = \ring_k$
+	\spa
+
+	$\therefore x \in P^{-1}$
+	\spa
+
+	Also $b \in (a) $ so $b$ is not a multiple of $a$, i.e. $\frac{b}{a} \in \ring_k$.
+	\spac
+	\textbf{Step 2: } Let $I \subseteq P$ an ideal, want to show that $P^{-1}I$ is an ideal bigger than $I$.
+	\spa
+
+	$P^{-1} I \subseteq P^{-1}P \subseteq \ring_k $, from the definition of $P^{-1}$.
+	\spa
+
+	$\therefore P^{-1} $ is an ideal and $P^{-1} \supseteq \ring_k$ so $P^{-1} I \supseteq \ring_k I = I$
+	\spa
+
+	Suppose $P^{-1} I =I$. Let $x \in P^{-1}$, $x \in \ring_k$ then by step 1:
+	\spa
+
+	$xI \subseteq I$
+\spa
+
+	$I = Span_\Z\{ b_1, \dots, b_d\}$
+\spa
+
+	$xb_1 = m_{i1}b_1 + \dots + m_{id}b_d  \hspace{100pt} x\begin{pmatrix}
+		b_1\\
+		\vdots\\
+		b_d
+	\end{pmatrix} = \begin{pmatrix}
+		m_{ij}
+	\end{pmatrix}
+	\begin{pmatrix}
+b_1\\
+\vdots\\
+b_d
+	\end{pmatrix}
+	$
+\spa
+
+So $x$ is an eigenvalue of $(m_{ij})$, $x \in \ring_k$ \lightning
+\spac
+\textbf{Step 3: } Let $I=P$, by step 2, $P^{-1}P$ is a bigger ideal than $P$ but $P$ is maximal.
+$ P^{-1} P = \ring_k$
+
+
+
 \end{proof}
 
 
+\begin{theorem}
+If $k$ is a number field and $\ring_k$ is the ring of algebraic integers in $k$, then every non-zero ideal $I$ has a unique factorisation $I = P_1 \dots P_r$ for maximal ideal $P_i$.
+\end{theorem}
+\spa
+We'll now concentrate on these questions:
+\begin{enumerate}
+	\item{Given $I$, how do we find $P_1, \dots P_r$?}
+	\item{How do we find $N(I)$?}
+	\item{What are the maximal ideals in $\ring_k$?}
+\end{enumerate}
+
+\subsection{Norms of ideals}
+
+\begin{defn}
+	$N(I) = |\ring_k/I|$
+
+	$N\Big( (\B)\Big) = |N(\B)|$
+\end{defn}
+
+\begin{theorem}
+	Let $I, J$ be non-zero ideals in $\ring_k$ then $N(IJ) = N(I)N(J)$.
+\end{theorem}
+\spa
+We can use the theorem to calculate $N(I)$ if $I$ is not a principal ideal.
+\spac
+\textbf{Remark:} Suppose $\sigma: k \rightarrow k$ is a field homomorphism.
+\spac
+If $\B \in \ring_k$ then $\sigma(\B) \in \ring_k$ because they have the same minimal polynomial, i.e. $\sigma(\ring_k) = \ring_k$
+\spac
+If $I$ is an ideal, then $\sigma(I)$ is also an ideal.
+\spac 
+Also $N(\sigma I) = |\ring_k /\sigma(I) | = |\sigma(\ring_k) /\sigma(I)| = |\ring_k / I| = N(I)$ 
+\spac
+\textbf{E.g.} Let $k = \Q(\sqrt{-5})$, $\ring_k = \Z[\sqrt{-5}]$ because $-5 \not \equiv 1 \hspace{7pt} (4) $
+\spa
+
+$I = (2, 1+\sqrt{-5})$ and $\sigma(x+y\sqrt{-5}) = x-y\sqrt{-5}$ then:
+
+\begin{align*}
+	\sigma(I) &= (2, 1-\sqrt{-5})\\
+	I* \sigma(I) &= (2, 1+\sqrt{-5} ) (2, 1-\sqrt{-5}) \\
+	& = (\cancel{4},\cancel{2 - 2\sqrt{-5}} , \cancel{2+2\sqrt{-5}}, \cancel{6} )\\
+	& = (2)
+\end{align*}
 
 
 
+\begin{align*}
+	N(I)^2 = N(I*\sigma(I)) &= N\Big((2)\Big)\\
+	& = |N(2)|\\
+	 & = 4
+\end{align*}
+
+$\therefore N(I) = 2$
+
+\begin{theorem}
+	N(IJ) = N(I)N(J) 
+\end{theorem}
+\begin{proof}
+Sufficient to prove when $J=P$ is a maximal ideal.
+\spa
+
+	$N(IP) = |\ring_k / IP|$
+\spa
+
+	$\ring_k \cong (\ring_k/IP) \Big/ (I/IP)$
+\spa
+
+	$\therefore N(I) = \cfrac{N(IP)}{|I/IP|}$
+\spac
+
+	So we want to prove $|I/IP| = N(P) = |\ring_k / P|$.
+\spa
+
+	We'll find an isomorphism $\ring_k / P \cong I/IP$ such that $IP \subsetneq I$.
+\spa
+
+Choose $a \in I$ such that $a \not \in IP$.
+\spa
+
+Define $\Phi : \ring_k \rightarrow I/IP$ by:
 
 
 
+	\hspace{59pt}$x \rightarrow ax \mod IP$
+\spa
+
+	Then this means $IP \subsetneq IP+(a) \subseteq I$.
+\spa
+
+	Since $P$ is maximal, $IP + (a) = I$.
+	\spa
+
+	$\therefore$ Every element of $IP$ is congruent mod $IP$ to a multiple of $a$.
+\spa
+
+$\therefore \Phi $ is surjective.
+\spa
+
+	$ker( \Phi)$ is an ideal, not just a subgroup of $\ring_k$.
+	If $ax \equiv 0 \hspace{7pt} (IP) $ then for all $y \in \ring_k$:
+\spa
+
+	$axy \equiv 0 \hspace{7pt} (IP)$
+\spa
+
+So $x \in ker \implies xy \in ker$.
+\spa
+	
+	If $x \in P$ then $ax \in IP$, since $a \in I$.
+\spa
+
+	So $\Phi(x) \equiv 0 \hspace{7pt} (IP) $ i.e. $x \in ker(\Phi)$ and $ker(\Phi)$ is an ideal containing $P$.
+	\spa
+
+	Since $P$ maximal, $ker(\Phi) = P$ or $\ring_k$.
+\spa
+
+	But $\Phi$ is surjective $\implies \Phi \neq 0 \implies ker(\Phi) \neq \ring_k$.
+\spa
+
+Therefore $ker(\Phi) = P$ and by the first isomorphism theorem:
+\spa
+
+$\ring_k / P \cong I/IP$ so $ N(P) = |I/IP|$
+
+\end{proof}
+\begin{cor}
+	If $I \subseteq \ring_k$ is a non-zero ideal and $N(I)$ is a prime number then $I$ is maximal.
+\end{cor}
+\spa
+\textbf{E.g.} In $\Z[\sqrt{-5}$, the ideal $(2, 1+\sqrt{-5})$ has norm 2 so is maximal.
+
+
+\begin{proof}
+$I = P_1\dots P_r$ for $P_i$ maximal and by the theorem:
+	\begin{align*}
+		N(P_1)N(P_2) \dots N(P_r) & \text{ is prime} 
+	\end{align*}
+	
+	Note that for all $N(P_i)$, $ N(P_i) > 1$.
+
+$\therefore r =1$ so $I=P_1$
+\end{proof}
+
+
+\begin{lemma}
+	$N(I) \in I$
+\end{lemma}
+
+
+\begin{proof}
+Let $n$ be the order of 1 in the additive group $\ring/I$.
+So
+
+	\begin{align*}
+		n = \underbrace{1 + 1 +1+\dots +1}_n \equiv 0 \hspace{7pt} (I)
+	\end{align*}
+
+	By corollary to Lagrange's theorem, $n | N(I) $ so $N(I) \equiv 0 \hspace{7pt} (I)$, i.e. $N(I) \in I$.
+\end{proof}
+
+\begin{cor}
+There are only finitely many ideals in $\ring_k$ with any given norm.
+\end{cor}
+\begin{proof}
+	Suppose $N(I) = n$, then $n \in I$ by the lemma.
+	Therefore $(n) \subseteq I$ and $I$ is factor of $(n)$.
+\spa
+
+	By uniqueness of factorisation $(n)$ has only finitely many factors.
+\end{proof}
+
+\begin{lemma}
+Let $R \subseteq S$ be commutative rings.
+If $P \subset S$ is a prime ideal then $P \cap R$ is a prime ideal of $R$.
+\end{lemma}
+
+
+\begin{proof}
+Suppose $xy \in P \cap R$ with $x,y \in R$. $xy \in P \implies x \in P $ or $y \in P$.
+\spa
+
+Since $x, y \in R$, we have $x \in P \cap R $ or $y \in P \cap R$
+\end{proof}
+\spa
+Let $P$ be a maximal ideal in $\ring_k$.
+By the lemma $P \cap \Z$ is a prime ideal in $\Z$.
+Also $P \cap \Z \neq \{0\}$ because $N(P) \in P$.
+
+Therefore $P \cap \Z = (p)$ for some prime number $p \in \Z$, i.e. $P | (p)$. We'll say "$P$ lies above $p$ and write $P|p$.
+\spac
+This means that to find all the maximal ideals of $\ring_k$, we just factorise $(P)$ for each prime number $p$.
+
+\begin{cor}
+	If $P \subset \ring_k$ is maximal then $N(P) = p^r$ for some $r \leq [k:\Q]$ where $P|p$ 
+\end{cor}
+\begin{proof}
+	$P|(p)$, therefore $N(P) |N\Big((p)\Big) = p^{[k:\Q]}$
+\end{proof}
+
+
+\subsection{Dedekind's Criterion}
+
+Assume $\ring_k =\Z[\A]$ and let $m(x)$ be the minimal polynomial of $\A$ and $p$ be a prime number.
+
+Suppose $m(x) \equiv m_1(x)^{e_1} \dots m_r(x)^{e_r}$ where $m_i \in \ff_p[x]$ are irreducible distinct, monic polynomials.
+
+Then $(p) = Q_1^{e_1} \dots Q_r^{e_r}$ where $Q_i = (p, m_i(\A))$. The ideals $Q_i$ are distinct and maximal and $N(Q_i) = p^{deg(m_i)}$.
+\spac
+\textbf{E.g.} $k = \Q(\sqrt{6})$, $\ring_k = \Z[\sqrt6]$, $\A = \sqrt6 $, $m(x) = x^2 -6$
+
+\spac
+	\begin{tabular}{l|l}
+		$x$                    & $m(x) = x^2 - 6$ \\ \hline
+		0                    & -6 = -2*3       \\
+		$\pm 1$              & -5              \\
+		$\pm 2$ & -2                           \\
+		$\pm 3$ & 3                              
+	\end{tabular}
+\spac
+
+$m(x) \equiv x^2 \hspace{7pt} (2)$ so $(2) = Q_2^2$ where $Q_2 = (2, m_i(\sqrt6))$.
+
+$m_i(x) = x$ so $Q_2= (2, \sqrt6)$
+\spac
+
+$m(x) \equiv x^2 \hspace{7pt} (3)$ 
+
+$(3) = Q_3^2 $ where $Q_3 = (3, \sqrt{6})$.
+\spac
+
+$m(x) \equiv (x-1)(x+1) \hspace{7pt} (5) $ 
+
+$(5) = Q_5 Q_5'$ where $Q_5 = (5, \sqrt6 + 1)$ and $Q_5' = (5, \sqrt6 - 1)$.
+\spac
+
+$m(x) \equiv m(x) \hspace{7pt} (7)$
+
+$(7) $ is a maximal ideal in $\Z[\sqrt6]$.
 
 
 
+\begin{proof}
+\spa
+
+	$\ring_k = \Z[\A]$
+
+	$\ring_k \cong \Z[x]/(m) $
+
+	$\A \leftarrow x \mod m$
+\spa
+
+	For each $Q_i$ we have:
+	\begin{align*}
+		\ring_k /Q_i & \cong \Z[x]/(m,p, m_i(x))\\
+		& \cong \ff_p[x] / (m,m_i)\\
+		&\cong \ff_p[x] / (m_i) \text{ because $ m_i | m $ in $\ff_p[x]$}
+	\end{align*}
+
+But $m_i $ is irreducible in $\ff_p[x]$
+	\begin{align*}
+		& \implies (m_i) \text{ is maximal in } \ff_p[x]\\
+		& \implies \ff_p[x]/(m_i) \text{ is a field }\\
+		& \implies \ring_k/Q_i \text{ is a field }\\
+		& \implies Q_i \text{ is maximal } 
+	\end{align*}
+
+	Also \begin{align*}
+		N(Q_i) &= |\ring_k/Q_i|\\
+		& = |\ff_p[x] / (m_i)|\\
+		& = p^{deg(m_i)}
+	\end{align*}
+
+	We'll next show that $(p) = Q_1^{e_1} \dots Q_r^{e_r} $:
+
+
+	\begin{align*}
+		Q_1^{e_1}\dots Q_r^{e_r}  &= (p, m_1(\A) )^{e_1} \dots (p, m_r(\A) )^{e_r} \\
+		& = (m_1(\A)^{e_1} \dots m_r(\A)^{e_r}, \text{ multiples of } p )
+	\end{align*}
+
+	But $m_1 (\A) ^{e_1} \dots m_r(\A)^{e_r} \equiv \underbrace{m(\A)}_0 \mod p$
+
+\spa
+
+	This shows that $Q_1^{e_1} \dots Q_r^{e_r} = (\text{multiples of }p)$, therefore $Q_1^{e_1} \dots Q_r^{e_r} \subseteq (p)$
+\spa
+
+To show that they are equal, we'll show that they have the same norm:
+
+	\begin{align*}
+		N(Q_1^{e_1} \dots Q_r^{e_r} ) &= N(Q_1)^{e_1} \dots N(Q_r)^{e_r} \\
+		&= (p^{deg(m_1)})^{e_1} \dots (p^{deg(m_r)})^{e_r} \\
+		&= p^{e_1deg(m_1) + \dots + e_r deg(m_r)}\\
+		&= p^{deg(m)}\\
+		&= N\Big((p)\Big)
+	\end{align*}
+
+	Therefore $(p) = Q_1^{e_1} \dots Q_r^{e_r}$.
+\spa
+
+	Remains to show that $Q_i$ are distinct $\ring_k /Q_i \cong \ff_p[x] /(m_i) $ with $\A \mapsto x$.
+\spa
+
+	Suppose $Q_i = Q_j$ then $m_j (\A) \in Q_i$.
+\spa
+
+Then $m_j(\A) \equiv 0 \hspace{7pt} (Q_i) $ and $m_j (x) \equiv 0 \hspace{7pt} (m_i) $ in $\ff_p[x]$.
+\spa
+
+So $m_i | m_j $ in $\ff_p[x]$
+\end{proof}
+\spa
+\textbf{E.g.}
+We'll factorise $(12 + 7\sqrt6)$ into maximal ideals in $\ring_k$
+
+\begin{align*}
+	N\Big( (12+7\sqrt6) \Big) & = |12^2 - 6*7^2|\\
+	& = |144 - 294|\\
+	& = |150|\\
+	& =2 *3*5^2 
+\end{align*}
+
+Recall that 
+
+$(2) = Q_2^2 $, 
+
+$(3)= Q_3^2 $,
+
+$(5)= Q_5Q_5' $ 
+\spa
+
+with norms:
+
+$N(Q_2) = 2$
+
+$N(Q_3) = 3$,
+
+$N(Q_5) = N(Q_5') = 5$ where 
+\spa
+
+
+$Q_2 = (2, \sqrt6 )$
+
+$Q_3 = (3, \sqrt6 )$
+
+$Q_5' = (5, \sqrt6 + 1 )$
+
+$Q_5' = (5, \sqrt6  -1)$
+\spa
+
+and $(7)^2$ is a prime ideal with norm $7^2$.
+\spa
+
+The ideals with norm 150 are $Q_2Q_3Q_5^2$, $Q_2Q_3Q_5Q_5'$ or $Q_2Q_3Q_5'^2$.
+\spa
+
+Note that $(5)$ is not a factor of $(12 + 7 \sqrt6)$.
+
+\spa
+
+
+If $Q_5$ is a factor then $(12 + 7\sqrt6) = Q_2Q_3Q_5^2$
+
+If $Q_5'$ is a factor then $(12 + 7\sqrt6) = Q_2Q_3Q_5^2$
+\spa
+
+Is $12 + 7\sqrt6 $ in $Q_5$ or $Q_5'$?
+\spa
+
+$12+7\sqrt6 = 5 + 7(\sqrt6 + 1) \in Q_5$
+ \spa
+
+ In this case $Q_2, Q_3, Q_5$ are all principal.
+ \spa
+
+ $N(x+y\sqrt6) = x^2 - 6y^2$
+ \spa
+
+
+ $N(2+ \sqrt6)  = - 2$
+
+ 
+ $N(3+ \sqrt6)  = 3$
+ 
+ 
+ $N(1+ \sqrt6)  = - 5$
+\spa
+
+ Therefore:
+
+ 
+ $(2 + \sqrt6 ) = Q_2$
+ 
+ $(3 + \sqrt6 ) = Q_3$ 
+
+ $(1+ \sqrt6 ) = Q_5$
+ 
+ $(1 - \sqrt6 ) = Q_5'$
+
+\spac 
+\textbf{E.g.} Let $ \Q(\sqrt{\A})$,  $\A^3 =\sqrt2$, $\ring =  \Z[\A]$, $m(x) = x^3 - 2$
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    \end{document}
+\begin{align*}
+	m(x) & = x^3 \hspace{7pt} (2)\\
+	& = (x+1) \equiv (x+1)^3 \hspace{7pt} (3)\\
+	& = (x+2) \underbrace{(x^2-2x-1)}_\text{ irreducible mod 5} \hspace{7pt} (5)\\
+	& = \text{ irreducible mod 7}
+\end{align*}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ \end{document}
 
  
 
