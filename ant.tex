@@ -44,8 +44,8 @@
 \newcommand{\ttt}{\theta}
 \newcommand{\phh}{\varphi}
 \newcommand{\ff}{\mathbb{F}}
-
-
+\newcommand{\ii}{\mathcal{I}}
+\newcommand{\pp}{\mathcal{P}}
 
 
 
@@ -156,7 +156,7 @@ $ $\\[1em]
 This motivates the question: which rings are unique factorisation domains? 
 More specifically which rings of algebraic integers are unique factorisation domains?
 
-\subsection{Definitions and proofs}
+\subsection{Definitions and Proofs}
 A ring is a set $R$ with two operations $ + $ \& $  \times $. 
 $(R, +)$ is an abelian group with identity element $0$. 
 $\times $ is commutative, associative and has identity 1. 
@@ -2791,7 +2791,7 @@ We'll now concentrate on these questions:
 	\item{What are the maximal ideals in $\ring_k$?}
 \end{enumerate}
 
-\subsection{Norms of ideals}
+\subsection{Norms of Ideals}
 
 \begin{defn}
 	$N(I) = |\ring_k/I|$
@@ -3194,25 +3194,412 @@ $12+7\sqrt6 = 5 + 7(\sqrt6 + 1) \in Q_5$
 \end{align*}
  
  
+
+\begin{tabular}{l|l}
+	$x$ & $m(x)$   \\
+	\hline
+	0   & -2       \\
+	1   & -1       \\
+	-1  & 3        \\
+	2   & 6=2*3    \\
+	-2  & -10=-2*5 \\
+	3   & 25=5*5   \\
+	-3  & -29     
+\end{tabular}
+ 
+\spa
+
+ \begin{align*}
+	 (2) &= P_2^3   \hspace{125pt}&    P_2 &= (2, \A) & \text{Norm 2}\\
+	 (3) &= P_3^3            \hspace{125pt}& P_3 &=(3, \A+1) & \text{Norm 3} \\
+	 (5) &= P_5 P_{25} 	\hspace{125pt} & P_5 &= (5,\A+2) & \text{Norm 5}\\
+	 & \hspace{125pt} & P_{25} &= (5, \A^2 - 2\A-1) & \text{Norm 25}\\
+	 &(7) \text{ is prime with norm } 7^3
+ \end{align*}
+ 
+ \subsection{Ramified Primes}
+
+ Suppose $p$ is a prime number and $(p) = Q_1^{e_1} \dots Q_r^{e_r}$ for $Q_i$ distinct prime ideals in $\ring_k$.
+ Then $p$ is ramified if the powers $e_1, \dots, e_r$ are not all 1.
+
+ For example 2 and 3 are ramified in $\Z[\sqrt[3]{2}]$.
+ \spac
+ Also in $\Q(\sqrt7)$, 2 and 7 are ramified and all the other primes are unramified.
+
+ This folllows then:
+ 
+ \begin{theorem}
+$p$ ramified $\iff p | \dd$ where $\dd$ is the discriminant of an integral basis.
+ \end{theorem}
  
  
+ \begin{proof}
+	 (Sketch)
+
+	 Assuming $\ring_k = \Z[\A]$
+	 \spac
+	 $(\implies) $ Assume $p$ is ramified, suppose $Q^2 | (p)$ where $Q$ is a maximal ideal. 
+	 $Q = (p, m_1(\A))$.
+
+	 By Dedekind's criterion, $m_1(x)^2$ is a factor of $m(x)$ in $\ff_p(x)$.
+	 Then:
+	 \begin{align*}
+		 m(x) &\equiv m_1(x)^2 f(x) \hspace{7pt} (p)\\
+		 m'(x) &\equiv m_1(x) g(x) \hspace{7pt} (p)\\
+		 m'(\A) &\equiv m_1(\A) g(\A) \hspace{7pt} (p) \in Q
+	 \end{align*}
+
+	 $N(m'(\A))$ is a multiple of $N(Q)$ which is a power of $p$.
+	 \spac
+	 $(\Longleftarrow)$ We can reverse the argument.
+ \end{proof}
+ \spac Let $k$ be a quadratic field, $p$ unramified in $k$.
+
+\begin{align*}
+	(p) = \begin{cases}
+		Q_1 Q_2 & Q_i \text{ norm p}\\
+		\text{prime} & \text{of norm } p^2
+	\end{cases}
+\end{align*}
+Call these two split or inert respectively.
+\spac
+Recall the Decomposition Theorem, let $k = \Q(\sqrt{n}$ where $n$ square free and let $p$ be prime which is unramified.
+If:
+\begin{align*}
+	\Big(\frac{n}{p}\Big)  &= 1 \text{ then $p$ splits}  \hspace{100pt}& 2 \text{ splits } \iff n &\equiv 1 \hspace{7pt} (8)\\
+	\Big(\frac{n}{p}\Big)  &= -1 \text{ then $p$ is inert}  \hspace{100pt}& 2 \text{ inert } \iff n &\equiv 5 \hspace{7pt} (8)\\
+\end{align*}
+We no longer need to assume $\ring_k$ is a UFD.
+
+\subsection{Quadratic Fields}
+Let $k = \Q(\sqrt{n})$ for $n \neq 1$ square-free, $\ring_k = \Z[\A] $ and 
+\begin{align*}
+	\A =
+	\begin{cases}
+		\sqrt{n} & n \not \equiv 1 \hspace{7pt} (4) \\
+		\frac{1+\sqrt{n}}2 &  n\equiv 1 \hspace{7pt} (4)
+	\end{cases}
+	&&\dd = \begin{cases}
+	4n & n \not \equiv 1 \hspace{7pt} (4)\\
+	n & n \equiv 1 \hspace{7pt} (4) 
+\end{cases} 
+\end{align*}
+Suppose $p$ is a prime number, then:
+
+\begin{itemize}
+	\item{$p$ is ramified $\implies (p) = Q^2$ \hspace{25pt}  $N(Q)=p$}
+	\item{$p$ is split $\implies (p) = Q_1Q_2$  \hspace{25pt} $Q_1 \neq Q_2$ $N(Q_i) = p$}
+	\item{$p$ is inert $\implies (p)$ prime with norm $p^2$}
+\end{itemize}
  
  
+ \begin{theorem}
+	 Let $p$ be unramified in $\Q(\sqrt{n})$.
+	 If $p$ is odd then:
+\begin{align*}
+	\Big(\frac{n}{p}\Big)  &= 1 \text{ then $p$ splits}  \hspace{100pt}& 2 \text{ splits } \iff n &\equiv 1 \hspace{7pt} (8)\\
+	\Big(\frac{n}{p}\Big)  &= -1 \text{ then $p$ is inert}  \hspace{100pt}& 2 \text{ inert } \iff n &\equiv 5 \hspace{7pt} (8)
+\end{align*}
+and ramified in other cases.
+ \end{theorem}
+
+\begin{proof}
+	Suppose $p$ odd, let $f(x) = x^2 - n $ be the minimal polynomial of $\sqrt{n}$ and $g(x)= \frac{1}{4} $ be the minimal polynomial of $\frac{1+\sqrt{n}}{2}$.
+
+	2 is invertible mod $p$, so $f$ factorises mod $p$ if and only if $g$ factorise mod $p$.
+
+	$\iff x^2 - n \equiv 0 \hspace{7pt} (p)$
+	\spa
+
+	$\iff \Big(\frac{n}{p}\Big) = 1$
+\spac
+
+	If $n \equiv 1 \hspace{7pt} (8)$ :
+	\begin{align*}
+		g(x) &= x^2 - x + \frac{1-d}4\\
+		&= x^2+ x \hspace{7pt} (2)\\
+		& = x(x+1) \hspace{7pt}(2) &&\text{split in this case}
+	\end{align*}
+\spac
+
+	If $n \equiv 5 \hspace{7pt} (8) $:
+	\begin{align*}
+		g(x) = x^2 +x+1 \hspace{7pt} (2)&& \text{irreducible}
+	\end{align*}
+\end{proof}
+\textbf{E.g.} If $k = \Q(\sqrt{5})$ and $\ring_k = \Z[\frac{1+\sqrt5}2]$ , how does $(199)$ factorise?
+
+\begin{align*}
+	\Big( \frac{5}{199} \Big) = \Big( \frac{199}5 \Big) = \Big(\frac{4}{5}\Big) = 1
+\end{align*}
  
+ Therefore $(199) = Q_1Q_2$ where $N(Q_1)=N(Q_2)=199$
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+\subsection{Cyclotomic Fields}
+Let $\z$ be the primitive $n^{th}$ root of unity and $k = \Q(\z) $ then $[k:\Q] = \phh(n)$, the Euler totient function.
+
+Also $\Phi(x) $ is the minimal polynomial of $\z$
+
+
+\begin{theorem}
+	Let $\z$ be the primitive $n^{th}$ root of unity with $p$ prime not dividing $n$ and let $f = $ order of $p$ in $(\mathbb{Z}/n)^\times$ and $fg = \phh(n) $.
+
+	Then $p$ is unramified in $\Q(\z)$ and $(p) = Q_1 \dots Q_g$ where $Q_i$ is a prime ideal with norm $p^f$ 
+\end{theorem}
+\spa
+\textbf{E.g.} $n= 5$ and $\phh(5) = 4 $
+\spac
+\begin{tabular}{l|l|l|l}
+	$p \mod n$ & $f$ order ($p$ mod 5) & $g$ & Factorisation of $(p)$               \\
+	\hline
+	1          & 1                     & 4   & $Q_1Q_2Q_3Q_4$                       \\
+	2          & 4                     & 1   & $(p)$ is prime with norm $p^4$       \\
+	3          & 4                     & 1   & $(p)$ is prime with norm $p^4$       \\
+	4          & 2                     & 2   & $Q_1Q_2$ $Q_i$ prime with norm $p^2$
+\end{tabular}
+
+
+\begin{proof}
+	\spa
+
+	Let $p$ be a prime $p \not | n $, $\Phi_n(x) | x^n - 1 = g(x) $.
+\spa
+
+	To show that $p$ is unramified, we'll show that $g$ has no repeated factors in $\ff_p[x]$.
+\spa
+
+	$g'(x) = nx^{n-1} $ is coprime to $g(x)$ because $n \not \equiv 0 \hspace{7pt}  (p)$
+\spa
+
+	Therefore $\Phi_n(x) $ has no repeated factors in $\ff_p[x]$ and by Dedekind's criterion $p$ is unramified.
+	\spa
+
+	Let $Q$ be a prime ideal above $p$. 
+
+	Then $N(Q) = p^r$. 
+	Sufficient to prove $r=f$.
+\spac
+	\textbf{Step 1} $(r\geq f)$: We'll first show that $\z$ has order $n$ in $(\ring_k/Q)^\times$
+
+	By a corollary to Lagrange's theorem, $n | \underbrace{N(Q) - 1}_{p^r -1 }$, i.e. $p^r \equiv 1 \hspace{7pt} (n) $. 
+	\spa
+
+	So $r\geq f$.
+	\spa
+
+	We know $\z^n \equiv 1 \hspace{7pt} (Q) $. 
+	Suppose $\z^d \equiv 1 (Q)$ where $d$ is a proper factor of $n$. 
+\spa
+
+	$\z $ is a common root in $\ring_k / Q$ of $\Phi_n$, $x^d -1$.
+	\spa
+
+	Therefore $\z$ is a repeated root of $x^n - 1$ in $\ring_k / Q$ which is a contradiction since $g(x), g'(x)$ are coprime mod $p$.
+	\spac
+	\textbf{Step 2} $(r \leq f)$: We'll show that every element of the field $\ring_k /Q$ is a root of $x^{p^f} - x  \implies |\ring_k / Q| \leq p^f$ and then $p^r = N(Q)$
+\spa
+
+By Fermat's little theorem if $x \in \Z$ then:
+	\begin{align*}
+		x^p &\equiv x \hspace{7pt} (p)\\
+		x^{p^f} &\equiv x \hspace{7pt} (p)\\
+		x^{p^f} &\equiv x \hspace{7pt} (Q)
+	\end{align*}
+
+	Also $p^f \equiv 1 \hspace{7pt} (n)$ and $\z^{p^f} = \z$.
+\spa
+
+	Note that in any ring $(x+y)^p \equiv x^p + y^p \hspace{7pt} (p) \implies (x+y)^{p^f} \equiv x^{p^f} + y^{p^f}$ for $p$ prime
+\spa
+
+	Let $\B = x_0 + x_1 \z + \dots + x_r \z^r \in \Z[\z]$.
+	Then:
+
+	\begin{align*}
+		\B^{p^f} &\equiv x_0^{p^f} + (x_1\z)^{p^f} + \dots + (x_r \z^r)^{p^f} \hspace{7pt} (p)\\
+		& \equiv x_0 + x_1\z^{p^f} + \dots + x_r\z^{rp^f} \hspace{7pt} (p)\\
+		& \equiv \B \hspace{7pt} (p)
+	\end{align*}
+
+	Therefore $\B^{p^f} \equiv B \hspace{7pt} (Q) $ because $Q | (p)$.
+
+\end{proof}
+\newpage
+
+\section{Class Groups}
+
+Let $k$ be a number field. 
+
+\begin{defn}
+	$\mathcal{I}_k$ = \{non-zero fractional ideals in $k$\}
+\end{defn}
+\spa
+$\ii$ is a group under multiplication of fractional ideals..
+\spac
+A principal ideal is one of the form:
+\begin{align*}
+	(\B) &= \{ \B \G : \G \in \ring_k \}\hspace{7pt}  (\B \in k)\\[1em]
+	(\B_1&)(\B_2) = (\B_1\B_2)
+\end{align*}
+Let $\pp_k $ be the set of principal fractional ideals, $\pp$ is a subgroup.
+\spac
+The class group of $k$ is $Cl_k = \ii_k / \pp_k$. 
+Elements of the class group are called ideal closure.
+\spac
+If $I $ and $J$ are in the same ideal class we'll write $I \sim J$.
+This is equivalent to saying $I = (\B) J$ for some $\B \in k^\times $.
+\spac
+If $\ring_k $ is PID $\iff Cl_k = \{1 \}$ then factorisation of elements is unique.
+So the size of the class group tells us how far $\ring_k$ is from having unique factorisation or being PID.
+
+\spac
+Recall  $x^5 = y^2 + 33$, if $(x,y)$ is any solution in integers then $(y + \sqrt{-33}) = I^5$ for some ideal $I$.
+It would be nice to be able to say that $I$ is a principal ideal.
+\spac
+$I^5 \sim (1) $ in $Cl_k $ so the ideal class of $I$ has order $1$ or $5$ in $Cl_k$.
+If $Cl_k$ has no elements of order 5 then $I \sim (1) $ so $I$ is a principal ideal.
+
+\begin{theorem}
+$Cl_k$ is finite, then there exists a constant $M_k$ depending only on $k$.
+\end{theorem}
+\begin{lemma}
+	Let $I$ be a non zero ideal of $\ring_k$ then there exists $\B \in I$ such that $|N(\B)| \leq M_kN(I)$
+\end{lemma}
+\begin{proof}
+Theorem 5.2
+
+We'll show that every ideal class contains an ideal with norm $\leq M_k$.
+Since there are only finitely many ideals with a specific norm, there are only finitely many ideal classes.
+\spa
+
+	Let $I$ be a fractional ideal, $(\B) I \subseteq \ring_k$ for some non-zero $\B \in \ring_k$.
+\spa
+
+	Since  $I \sim (\B) I$ every ideal class contains an ideal.
+	Let $J$ be an ideal in the class of $I^{-1}$.
+\spa
+
+	By the key lemma, there exists $\B \in J$, $\B \neq 0$ such that $|N(\B)| \leq M_k N(J)$. 
+	\spa
+
+	Since $\B \in J$, $(\B) \subseteq J \implies J | (\B) \implies (\B) = J*I'$ for some ideal $I'$.
+\spa
+
+	This means $I'J \sim (1)$ so $I' \sim J^{-1} \sim I$ and $N(I') = \frac{N\big((\B)\big)}{N(J)} \leq M_k$
+
+
+
+
+\end{proof}
+
+
+\subsection{How to calculate the class group}
+
+First we need to know the constant $M_k$.
+
+\begin{align*}
+	M_k = \bigg(\frac4\pi\bigg)^s \frac{d!}{d^d} \sqrt{|\dd|} && d&=[k:\Q] \text{, Minkowski bound}\\
+	&& \dd& \text{ is the discriminant of the integral basis}\\
+	&& s&  \text{ is the number of pairs of complex field embeddings / roots of $m_\A(x)$}
+\end{align*}
+\spac
+If $\sigma_1, \dots, \sigma_d : k \hookrightarrow \C$, reorder these so that $\sigma_1, \dots, \sigma_r : k \hookrightarrow \R$.
+Call these real embeddings.
+Similarly,
+$\sigma_{r+1} , \dots, \sigma_{r+s} : k \hookrightarrow \C$ such that:
+\begin{align*}
+	\sigma_{r+s+1} &= \bar \sigma_{r+1}\\
+	\vdots &\\
+	\sigma_{r+2s} & = \bar \sigma_{r+s}
+\end{align*}
+Call these complex embeddings. Note that these complex embeddings are in complex conjugate pairs.
+\spac
+\textbf{E.g.} $k = \Q(\sqrt{5} ) $, $s \equiv 1 \hspace{7pt} (4)$ so $\ring_k = \Z [\frac{1+\sqrt{5}}{2}]$, $\dd = 5$, $d = 2$, $s =0$.
+
+Then $M_k = \frac{2!}{2^2} \sqrt{5} = \sqrt{\frac54} < 2$.
+\spa
+
+We showed that ever ideal class contains an ideal with norm $< M_k$.
+In this case the only ideal with norm $<M_k$ is $(1)$, therefore $Cl_k = \{(1)\}$
+
+So $\Z[\frac{1+\sqrt{5}}2]$ is a UFD and a PID.
+\spac
+\textbf{E.g.} $k = \Q(\sqrt{-5}) $, $\dd=  -20$.
+\spa
+
+Then $M_k  = \frac{4}{\pi}^1 \frac{2!}{2^2} \sqrt{20} = \frac{\sqrt{80}}{\pi} < \frac9\pi < 3$.
+\spa
+
+So every ideal class contains an ideal of norm $1$ or $2$. 
+$(1)$ has norm 1.
+\spa
+
+$x^2 + 5 \equiv (x+1)^2 \hspace{7pt} (2) $ which means $(2) = P_2^2 $ and $N(P_2) = 2$ where $P_2 = (2, ,\sqrt{-5} +1 )$.
+\spa
+
+So the ideals with norm $< M_k$ are $(1), P_2$.
+\spa
+
+Since $N(x+y\sqrt{-5}) = x^2+5y^2 \neq 2$, there are no elements of norm 2 so $P_2 \not \sim (1) $ and $Cl_k = \{(1) , P2\}$. This is a cyclic group of order 2 and not a PID.
+\spa
+
+In many cases we can show that $\ring$ is a PID, to do this, we just show that each ideal with norm $M_k$ is principal, equivalently, any maximal ideals with norm $M_k$ is principal.
+
+\spac
+\textbf{E.g.} $k = \Q[\sqrt{6}]$, $\dd = 24$, $\ring_k = \Z[\sqrt6]$, $d=2$, $s=0$
+\spa
+
+$M_k = \frac{4}{\pi} \frac{2!}{2^2} \sqrt{24} = \sqrt{6} < 3$.
+\spa
+
+This means every ideal class contains an ideal or norm $1$ or $2$.
+\spa
+
+$2 | 24$ so $(2) = P_2^2$ and the ideals of norm 1 or 2 are $(1), P_2$.
+\spa
+
+Now we need to check if $P_2$ is a principal ideal.
+\spa
+
+$N(x+y\sqrt6) = x^2 - 6y^2 $
+
+$N(2+\sqrt6 ) = -2$
+
+So $P_2 = 2+ \sqrt6 \implies P_2 \sim (1)$ and $Cl_k = \{ (1)\}$.
+\spac
+If we want to show whether $|x^2 - 6y^2  | = n$ has a solution, this is equivalent to asking whether there is an ideal of norm $n$.
+
+We can check this by factorising $n$ and using the decomposition theorem.
+
+\spac
+\textbf{E.g.} $k = \Q(\sqrt[3]2) $, $\ring = \Z[\sqrt[3]2] $, $m(x) = x^3 -2 $, $s=1$, $d=3$  
+\spa
+
+$\dd = 27b^2 - 4a^3 = -108 $ so 2 and 3 will be ramified.
+\spa
+
+$M_k = \frac4\pi * \frac{3!}{3^3} \sqrt{108} < \frac{4*2*11}{\pi *3^2} < 4$
+\spac
+
+\begin{tabular}{l|l|l}
+	$x$ & $x^3 - 2$ & $(x-\A)$ \\ \hline
+	0   & -2        & $P_2$    \\
+	1   & -1        & (1)      \\
+	-1  & -3        & $P_3$   
+\end{tabular}
+
+\begin{align*}
+	m(x) = x^3 - 2 &\equiv x^3 \hspace{7pt} (2) \hspace{50pt} & (2) &= P_2^3 \text{ where } P_2 = (0 - \A) \sim (1) \\
+	&\equiv (x+1)^3 \hspace{7pt} (3) 
+\end{align*}
+
+
+
+
+
+
+
  \end{document}
 
  
