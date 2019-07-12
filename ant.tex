@@ -17,6 +17,9 @@
 %place text under sigmas and pi
 \usepackage{mathtools}
 %kappa%
+\usepackage{graphicx}
+
+
 \newenvironment{rcurly}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
 
 \begin{document}
@@ -3494,7 +3497,7 @@ Since there are only finitely many ideals with a specific norm, there are only f
 \end{proof}
 
 
-\subsection{How to calculate the class group}
+\subsection{How to Calculate the Class Group}
 
 First we need to know the constant $M_k$.
 
@@ -3591,8 +3594,729 @@ $M_k = \frac4\pi * \frac{3!}{3^3} \sqrt{108} < \frac{4*2*11}{\pi *3^2} < 4$
 
 \begin{align*}
 	m(x) = x^3 - 2 &\equiv x^3 \hspace{7pt} (2) \hspace{50pt} & (2) &= P_2^3 \text{ where } P_2 = (0 - \A) \sim (1) \\
-	&\equiv (x+1)^3 \hspace{7pt} (3) 
+	&\equiv (x+1)^3 \hspace{7pt} (3)  \hspace{50pt} & (3) &= P_3^3 \text{ where } P_3 = (-1-\A) \sim (1)
 \end{align*}
+
+All ideals of norm $<4$ are principal ideals so $\Z[\sqrt[3]{2}2] $ is a PID.
+
+This allows us to solve $\det \begin{pmatrix}
+	x & 2z & 2y\\
+	y & x & 2z \\
+	z & y & x
+\end{pmatrix} = n$
+
+
+Consider $x^3 = y^2 + y+8 = (y + \A) (y + \bar \A)$ for $\A =\frac{1+\sqrt{-31}}2$. 
+Show that the ideals $(y+ \A) (y+\bar \A)$ are coprime as ideals then using the "Ideal Descent Lemma", $ (y+\A) = I^3$ for some ideal $I$.
+\spa
+\subsection{Ideal Descent Lemma}
+\begin{lemma} 
+Suppose $I,J, K \subseteq \ring_k$ are ideals $IJ= K^n$ for $I,J$ coprime.
+	Then $I= I_0^n $ and $J=J_0^n$ for some ideals $I_0, J_0$.
+\end{lemma}
+\spa
+\textbf{E.g.} Suppose that $y+\A = (a+b\A)^3 = a^3 + 3a^2b\A + 3ab^2(\A-8) + b^3(-7\A - 8)$  for $a,b \in \Z$.
+\spa
+
+Consider $x^3 = y^2 + y +8$ and $ 1 = 3a^2b + 3ab^2 -7b^3$.
+\spa
+
+$b | 1$ so if $b=1 \implies 3a^2 + 3a-8 = 0$ \lightning
+\spa
+
+If $b=-1$ : 
+\begin{align*}
+	-3a^2 + 3a+6&=0\\
+	a^2-a-2 &= 0\\
+	(a-2)(a+1) &= 0 \\
+	a=2,-1
+\end{align*}
+
+$\implies x=1,y=31$ or $x=10,y=-32$
+\spa
+
+We missed the solution $x = 2, y= 0 $ and $x=2, y=-1$. 
+We missed it because we assumed that if $y+\A = I^3$ then I must be a principal ideal.
+$I$ can be an element of order 3 in the class group.
+\spac
+\textbf{E.g.} $k = \Q(-\sqrt{3} )$, $\ring_k = \Z[\A]$, $\A = \frac{1+\sqrt{-31}}2$. 
+
+We'll calculate the class group.
+
+$d = 2$, $s=1$, $\dd=31$
+\spa
+
+$M_k = \big(\frac4\pi\big)\big(\frac{2!}{2^2}\big) \sqrt{31} = \frac2\pi\sqrt{31} < 4$
+
+
+\begin{align*}
+	m(x) &= x^2-x+8\\
+	&\equiv x(x+1) \hspace{7pt} (2)    \\
+	&\text{ irreducible mod 3 (from the table)}
+	&&&\begin{tabular}{l|l}
+		$x$ & $x^2-x+8$ \\ \hline
+		0   & 8         \\
+		1   & 8         \\
+		2   & 10=2*5   
+	\end{tabular}
+\end{align*}
+
+Ideals of norm $<M_k$ are $(1), P_2, P_2'$ where $P_2 = (2,\A) $ and $P_2' = (2, \A+1)$.
+\spa
+
+$N(x+y\A) = x^2 + xy+ 8y^2 \geq 7y^2$.
+\spa
+
+If $N(x+y\A) \leq 6$ then $y=0 \implies $ no elements of norm 2.
+\spa
+
+Suppose $P_2 \sim P_2'$, $P_2P_2' = (2) \sim (1)$.
+\spa
+
+There are no elements of norm 2 so if $P_2 \sim P_2' $ then $P_2^2 \sim (1)$.
+\spa
+
+The only elements of norm 4 are $\pm 2$.
+These generate $(2) = P_2P_2'$ not $P_2^2$ 
+
+
+\begin{tabular}{l|lll}
+	& $(1)$ & $P_2$ &$P_2'$ \\ \hline
+	(1) & (1) & $P_2$ & $P_2'$ \\
+	$P_2$ & $P_2$ & $P_2'$ &(1)\\
+	$P_2'$ & $P_2'$ &(1) & $P_2$
+\end{tabular}
+
+
+\subsection{Calculating Class Groups}
+
+\textbf{E.g.} $k = \Q(\sqrt{10})$, $\hspace{7pt} \ring = \Z[\sqrt{10}] $, \hspace{7pt}$m(x) = x^2 - 10$
+
+$\dd = 4*10 = 40$, \hspace{7pt}$d =[k:\Q] = 2$,\hspace{7pt}  $  s = 0$
+\spa
+
+$M_k = \big(\frac4\pi\big)^s \frac{d!}{d^d} \sqrt{|\dd|} = 10 < 4$
+\spa
+
+Every ideal class contains an ideal with norm $<4$
+\spac
+
+\begin{tabular}{|l|l|l|}
+	$x$     & $x^2-10$  & $(x^2 -\sqrt{10})$ \\ \hline
+	0       & -10 = 2*5 &                    \\
+	$\pm 1$ & -9 = -3*3 &                    \\
+	+2      & -6 = 2*3  & $P_2 P_3$          \\
+	-2      & -6 = 2*3  & $P_2 P_3'$         \\
+	$\pm 3$ & -1        &                    \\
+	$\pm 4$ & 6=2*3     &                   
+\end{tabular}
+
+
+\begin{align*}
+	m(x) &= x^2 \hspace{7pt} (2)\\
+	& \equiv (x+1)(x-1) \hspace{7pt} (3) 
+\end{align*}
+
+This means $(2) = P_2^2$, $(3) = P_3 P_3'$ where $P_2 = (2,\sqrt{10})$, $P_3 = (3, \sqrt{10}+1)$ and $P_3' = (3, \sqrt{10} -1)$.
+
+So the relations in the class group are:
+
+\begin{align*}
+	P_2^2 & \sim (1) &&& P_2 \sim P_2^{-1}\\
+	P_3P_3' & \sim (1) &&& P_3' \sim P_3^{-1}\\
+	P_2P_3 &\sim (1) &&& P_2 \sim P_3^{-1} \sim P_3'\\
+	P_2P_3' &\sim(1) &&& P_2 \sim P_3'^{-1}
+\end{align*}
+
+There are at most 2 ideal classes, $1, P_2$.
+
+Remains to check whether $P_2 \sim (1)$ or not, check whether $P_2$ is a principal ideal.
+\spa
+
+Suppose $N(x+y\sqrt{10}) = \pm 2$, \hspace{5pt} $x^2-10y^2 = \pm 2 \implies x^2 \equiv \pm 2 \hspace{7pt} (5) $, which has no solutions. \lightning
+\spa
+
+$P_2 \sim(1) \implies Cl_k = \{(1), P_2\}$
+
+\spa
+\textbf{E.g.} $ k = \Q(-\sqrt{-30} $,\hspace{7pt} $\ring_k = \Z[-\sqrt{-30}]$
+
+
+$ \dd = -120$,  \hspace{7pt} $d = [k:\Q] = 2$, \hspace{7pt} $s = 1$
+
+Note that $2,3,5$ are ramified.
+\spa
+
+$M_k= \big( \frac4\pi \big)* \frac12 \sqrt{120} = \frac{2*\sqrt{120}}{\pi} < \frac{2*11}{3} < 8$
+\spa
+
+$m(x) = x^2 \hspace{7pt} (2),(3),(5) $ and is irreducible mod 7.
+\spac
+
+\begin{tabular}{|l|l|l|}
+	$x$     & $x^2+30$   & $(x-\sqrt{30})$ \\ \hline
+	0       & 30 = 2*3*5 & $P_2P_3P_5$     \\
+	$\pm 1$ & 31         &                 \\
+	$\pm 2$ & 34 = 2*17  &                 \\
+	$\pm 3$ & 39 = 3*13  &                
+\end{tabular}
+\spac
+
+This means $(2) = P_2^2$,\hspace{7pt}  $(3) = P_3^2 $, \hspace{7pt} $(5) = P_5^2$ and (7) is prime with norm 49.
+\spa
+
+The ideals with norm $< M_k$ are $(1), P_2, P_3, P_2^2 \sim (1) , P_5, P_2P_3$. Then $|Cl_k | \leq 5$.
+\spa
+
+Relations in the class group are:
+\begin{align*}
+	P_2^2 \sim P_3^2 \sim P_5^2 \sim (1)\\
+	P_2P_3P_5\sim(1)\\
+	P_2P_3 \sim P_5^{-1} \sim P_5
+\end{align*}
+
+So $Cl_k$ has at most 4 elements, $(1), P_2, P_3, P_5$.
+\spa
+
+Are any of these equivalent? $N(x+y\sqrt{-30}) = x^2 + 30y^2 \neq 2, 3,5,6,10, \dots$
+\spa
+
+$P_2 \not \sim (1)$, $P_3 \not \sim (1) $, $P_5 \not \sim (1)$, $P_2P_3 \sim (1) $.
+
+Using these relations, we can then determine that $P_2 \sim P_3^{-1} $, $P_2 \not \sim P_3$.
+\spa
+
+Also $P_2^2 \sim (1)$ so $P_2$ has order $2$ in $Cl_k$, therefore $|Cl_k|$ is even and $Cl_k = 4$.
+
+So $Cl_k = \{(1), P_2,P_3,P_5 \}$ and the group table is:
+\spac
+
+\begin{tabular}{l|llll}
+	      & (1)   & $P_2$ & $P_3$ & $P_5$ \\ \hline
+	      (1)   & (1)   & $P_2$ & $P_3$ & $P_5$ \\
+	      $P_2$ & $P_2$ & (1)   & $P_5$ & $P_3$ \\
+	      $P_3$ & $P_3$ & $P_5$ & (1)   & $P_2$ \\
+	      $P_5$ & $P_5$ & $P_3$ & $P_2$ & (1)  
+\end{tabular}
+\spac
+\spac
+\textbf{E.g.} $k = \Q(\sqrt{-29}$, \hspace{7pt} $\ring_k = \Z[\sqrt{-29}]$, \hspace{7pt} $m(x) = x^2 + 29$, \hspace{7pt}
+
+$\dd = -116$, $ d=2$, $s=1$
+\spac
+
+
+$M_k = \big(\frac{4}{\pi}\big) \frac12 \sqrt{16} < 8$
+\spac
+
+\begin{tabular}{|l|l|l|}
+	$x$     & $x^2 + 29$ & $(x-\sqrt{29})$ \\ \hline
+	0       & 24         &                 \\
+	1       & 30 = 2*3*5 & $P_2P_3'P_5'$   \\
+	-1      & 30 = 2*3*5 & $P_2P_3'P_5$    \\
+	$\pm 2$ & 33=3*11    &                 \\
+	$\pm 3$ & 38 = 2*19      
+\end{tabular}
+
+
+\begin{align*}
+	m(x) &\equiv (x+1)^2 \hspace{7pt} (2)\\
+	& \equiv (x+1)(x-1)  \hspace{7pt} (2)\\
+	& \text{ irreducible mod 7}
+\end{align*}
+
+This means $(2) = P_2^2$, $(3) = P_3P_3'$, $(5) = P_5P_5'$ and $(7)$ is prime with norm 49 where 
+
+$P_3 = (3,\sqrt{-29}+ 1)$ 
+
+$P_3' = (3, \sqrt{-29} -1)$
+
+$P_5 = (5,\sqrt{-29}+ 1)$ 
+
+$P_5' = (5,\sqrt{-29}-1)$
+
+
+
+The ideals with norm $<8$ are: $ (1), P_2, P_3, P_3', P_2^2 \sim (1), P_5, P_5', P_2P_3, P_2P_3'$.
+
+We know $|Cl_k| \leq 8$, this must mean that there must be classes in the class group which are equivalent to each other, find these by determining the relations between them.
+
+\begin{align*}
+	P_2^2 &\sim (1) &&& P_2P_3P_5 &\sim P_2P_3'P_5' \sim (1)\\
+	P_3P_3' &\sim (1) &&& P_2P_3 &\sim P_5'^{-1} \sim P_5 \\
+	P_5P_5'&\sim (1)  &&& P_2P_3 &\sim P_5^{-1} \sim P_5'
+\end{align*}
+
+So $|Cl_k| \leq 6$.
+\spa
+
+$N(x+y\sqrt{-29}) = x^2+29y^2 \neq 2,3,5,6$ 
+
+The additional relations are:
+\begin{align*}
+	P_2 &\sim (1)& P_3' &\not \sim (1)  & P_2P_3 &\not \sim (1)  &P_2P_3 &\not \sim (1) \\
+	P_3 & \not \sim (1) & P_5 & \not \sim(1) & P_3 &\not \sim (1) & P_2 &\not \sim P_3\\
+	P_5 &\not \sim (1) 
+\end{align*}
+
+$P_2P_5' \not \sim (1) $ so $P_5P_5' \sim P_2$.
+\spa
+
+The remaining ideal classes are $(1), P_2, P_3, P_3', P_5, P_5' $.
+
+We have at least 3 ideal classes because $(1), P_2, P_3$ are all distinct, $P_2^2 \sim (1) $ so $P_2$ has order 2 therefore $|Cl_k| =4$ or $6$.
+\spa
+
+$P_3P_5, P_3'P_5, P_3,P_5', P_3'P_5'$ are not principal.
+\spa
+
+$\therefore P_5, \not \sim P_3'$
+\spa
+
+So we have at least 4 distinct ideal closures, $(1), P_2, P_3, P_5$
+
+Is $P_3 \sim P_3' $?
+
+This would mean $P_3^2 \sim (1)$.
+\spa
+
+Elements of norm 9 are $\pm 3$, these generate $P_3P_3'$ so $P_3^2 \not \sim (1) $ and $|Cl_k| = 6$
+\spa
+
+We know that $P_2P_3P_5 = (1+ \sqrt{-29})$ and $P_2P_3P_5' = (1-\sqrt{29})$. So,
+\begin{align*}
+	P_2P_3 \sim P_5^{-1} \sim P_5' && P_3P_5\sim P_2 && P_3'P_5 \sim P_2
+\end{align*}
+
+This means $P_3^2 \sim P_3'$ or $P_5$.
+Suppose $P_3^2 \sim P_3' \sim P_3^{-1}$ then $P_3 \sim (1)$ which is a contradiction since there are no elements of norm 3.
+\spa
+
+Also note that there is an element of norm 45, $(4 + \sqrt{-29}) = P_3^2 * P_5'$ so $P_3^2 \sim P_5'^{-1} \sim P_5$.
+\spac
+
+
+This results in the group table: 
+\begin{tabular}{|l|llllll|}
+	\hline
+	       & 1      & $P_2$  & $P_3$  & $P_3'$ & $P_5$  & $P_5'$ \\ \hline
+	       1      & (1)    & $P_2$  & $P_3$  & $P_3'$ & $P_5$  & $P_5'$ \\
+	       $P_2$  & $P_2$  & (1)    & $P_5'$ & $P_5$  & $P_3'$ & $P_2$  \\
+	       $P_3$  & $P_3$  & $P_5'$ & $P_5$  & (1)    & $P_2$  & $P_3'$ \\
+	       $P_3'$ & $P_3'$ & $P_5$  & (1)    & $P_5'$ & $P_3$  & $P_2$  \\
+	       $P_5$  & $P_5$  & $P_3'$ & $P_2$  & $P_3$  & $P_5'$ & (1)    \\
+	       $P_5'$ & $P_5'$ & $P_3$  & $P_3'$ & $P_2$  & (1)    & $P_5$ \\ \hline
+\end{tabular}
+
+\spac
+\spac
+Consider the minimal polynomial $x^2 - x+41 $, for $x = 0, \dots, 40$, the numbers are all prime. For $m(41) = 41^2$ it is not prime.
+
+\begin{tabular}{|l|l|}
+	\hline
+	$x$  & $m(x)$ \\ \hline
+	0    & 41     \\
+	1    & 41     \\
+	-1,2 & 43     \\
+	-2,3 & 47     \\
+	-3,4 & 53     \\ 
+	-4,5 & 61    \\ \hline
+\end{tabular}
+
+\spac
+Gauss discovered that $Cl_k = \{(1)\} $ in several complex quadratic fields, the last of these is $k = \Q(\sqrt{-163})$.
+\spac
+Gauss conjectured that this is the last one which is now proved.
+\spac
+$-163 \equiv 1 \hspace{7pt} (4) $ so $\ring_k = \Z[\A] $ where $\A = \frac{1+\sqrt{-163}}2$
+\spac
+$\A$ has minimal polynomial $m(x) = x^2 - x+41$.
+It's easy to show that this is a UFD.
+
+$s=1$, $d=2$, $\dd =-163$
+\spa
+
+$M_k = \big( \frac4\pi \big) * \frac{1}{2} \sqrt{163} = \frac{2\sqrt{163}}{\pi} < \frac{2*13}{3} < 9$.
+\spac
+From the table 2,3,5,7 are inert ideals of norm $<9$.
+\spac
+$ (1), (2) $ are both principle ideals so $Cl_k = \{(1)\}$.
+\spac
+We'll now see that $Cl_k= (1)$, the other values $m(x)$ for $x\leq 40$ are also prime.
+Suppose that $m(x)$ factorises, let $p$ be a prime factor.
+\spac
+$p \leq \sqrt{m(x)} < \sqrt{41^2}$ so $p<41$.
+\spac
+Therefore $m(x) $ has a root mod $p$ so there is an ideal $Q$ with norm $p$.
+\spac
+This must be a principal ideal since $Cl_k = \{(1) \}$, there is an element of norm $p < 41$.
+\begin{align*}
+	N(x+y\A) &= x^2 -xy + 41y^2\\
+	&= (x- \frac{1}{2} y)^2 + (41 - \frac14 y)^2
+\end{align*}
+\spa
+If $y \neq 0$ then this is $\geq 41 -\frac{1}{4}$ \lightning so this is not $p$.
+\spac
+If $y= 0 $ then this is $x^2$ so this is not $p$.
+\spac
+No element has norm a prime number $<41$ \lightning
+\spac
+$m(x)$ is prime $x= 1,2,\dots, 40$.
+Suppose $m(x)$ factorises let $p$ be a prime factor $p \leq \sqrt{m(x)} < \sqrt{41^2}$
+
+
+
+
+\subsection{Using Class Groups in Diophantine Equations}
+
+\textbf{E.g.} $x^3 = y^2 + 13 = (y+ \A) (y- \A)$ for $\A = \sqrt{-13}$.
+
+Want to show that $(y+\A), (y - \A)$ are coprime as ideals.
+\spa
+
+If $\Z[\sqrt{-13}]$ isn't a UFD $\implies $ cannot use the Descent Lemma.
+\spa
+
+By the Ideal Descent Lemma, $(y+\A) = I^3$ for some ideal.
+\spa
+
+$I^3 \sim (1) $ so $I$ has order 1 or 3 in $Cl_k$.
+\spa
+
+If $Cl_k$ has no elements of order 3 then $I \sim (1)$.
+\spac
+Why are $(y+ \A), (y-\A)$ coprime ideals?
+\spa
+
+Let $P$ be a common factor which is a prime ideal, so $y+\A, y-\A \in P \implies 2\A \in P$.
+\spa
+
+Since $P | y+\A, y-\A$, this means $P | 2\A$ and $P | (2\A)$ and $N(P) |N(2\A) = 4*13$.
+\spa
+
+If $2 | N(P)$, $(P) |(y + \A)$ and $N(P) | N(y+\A) = x^3$ then $2 | x^3 $ which implies $2|x$.
+\spa
+
+So $y^2 + 13 \equiv 0 \hspace{7pt} (8) \implies y^2 \equiv -1 \hspace{7pt} (4)$ \lightning
+\spa
+
+If $13 | N(P)$ then $13| x$ by a similar argument and $y^2 + 13 \equiv 0 \hspace{7pt} (13^2)$ which is irreducible mod $13^2$. \lightning
+
+
+Calculating the class group: $M_k = \big(\frac4\pi \big)* \frac12 \sqrt{52} < \frac{2*8}3 < 6$ 
+
+\begin{tabular}{|l|l|}
+	\hline
+	$x$                    & $x^2 + 13$ \\ \hline
+	0                      & 13         \\
+	$\pm 1$                & 14=2*7     \\
+	$\pm 2$                & 17         \\
+	$\pm 3$ & 22=2*11 \\  \hline
+\end{tabular}
+\spac
+	$m(x) \equiv (x+1)^2 \hspace{7pt} (2)$ and 
+	irreducible mod 3,5
+	\spac
+$(2) = P_2^2$ and so the ideals with norm $<6$ are $(1), P_2, (2)$.
+\spa
+
+$|Cl_k| \leq 2$ 
+
+$ N(x+y\sqrt{-13}) = x^2+ 13y^2 \neq 2 \implies P_2\not \sim(1)$
+\spac
+So $|Cl_k| = 2$.
+
+So there are no elements of order 3, $I^3 \sim (1) \implies I \sim (1)$ so $I$ is a principal ideal as $y+\A = (r+s\A)^3$.
+
+As elements $y+\A = \text{unit} * (r+s\A)^3$.
+\spa
+
+The units in $\Z[\sqrt{-13}]^\times$ are $\{\pm 1\}$.
+\spa
+
+Every unit is a cube so without loss of generality $y+\A = (r+s\A)^3$ resulting in the equation:
+\begin{align*}
+	y+\A = r^3 + 3r^2 s \A + 3rs^2 (-13) - 135s^3 \A
+\end{align*}
+\begin{align*}
+	y &= r^3-39rs^2  &&& 1&=3r^2s - 135s^3\\
+	&&&&& =(3r^2 - 13rs^2)s\\
+	&&&& \implies s &= \pm 1
+\end{align*}
+
+If $s =1$, $\implies 3r^2 = 14 $ \lightning
+\spa
+
+If $s= -1 $ ,$\implies 3r^2 = 12$ and so $r = \pm 2$.
+\spa
+
+So the final solutions to the equation are $(x,y) = (17,\pm 70).$
+
+\subsection{Geometry of Numbers}
+(Never understood this chapter so expect a lot of typos)
+
+Let $V = \R ^d$ and $\bba = \{ b_1,\dots,b_d\}$ be a basis for $V$. The lattice spanned by $\bba$ is $L = Span_\Z(\bba)  = \{x_1b_1 + \dots + x_db_d: x_i \in \Z \}$ 
+\spac
+	\includegraphics[width=150pt]{lattice.png} Example lattice with two basis vectors.
+\spac
+Also let the fundamental cell $P = \{\sum x_ib_i : x_i \in [0,1)\}$.
+We can think of $P$ as a set of coset representatives for $L$ in $V$, every $v \in V$ is congruent mod $L$ to a unique point in $P$.
+
+\spa
+$Vol(p) = |\det(b_1 \dots b_d)|$ is called the covolume of $L$.
+
+
+\begin{lemma}
+	Suppose $U \subseteq V$ with $Vol(U)$ well defined if $Vol(U) > Vol(P)$ then there exists $u,v \in U$ $u \neq v$ such taht $u - v \in L$.
+\end{lemma}
+
+$U = \bigcup_{l \in L} U_l$ where $U_l = U \cap(P+l)$
+
+
+\begin{proof}
+	Suppose $u \not \equiv v \hspace{7pt} (l)$ for all $u,v \in U$, $u \neq v$. Therefore $U_l - l \cap (U_m - m) = \emptyset$ for $l,m \in L$.
+
+	Then $Vol(u) = \sum Vol(U_l) = \sum Vol(u_l -l) = Vol(\bigcup_{l \in L}(u_l - l) )  \leq Vol(P)$ \lightning
+\end{proof}
+
+\begin{defn}
+	A subset $U \leq V$ is convex if for all $u,v \in U$, $\lambda \in [0,1]$ $\lambda u + (1-\lambda) v \in U$
+\end{defn}
+
+
+\begin{defn}
+A subset $U \leq V$ is symmetric if for all $ u \in U$, $-u \in U$
+\end{defn}
+
+
+\subsubsection{Minkowski's Lemma}
+\begin{lemma}
+
+Suppose $U \subseteq V$ is convex and symmetric and $Vol(U) > 2^d Vol(P)$, then $U$ contains a non-zero point of $L$.
+\end{lemma}
+
+\begin{proof}
+	$Vol(U) > 2^d Vol(P) = Vol(2P)$
+
+	$2P$ is the fundamental cell for the lattice $2L = \{ 2l :l \in L\}$.
+	\spa
+
+	By the previous lemma, there exists $u,v \in U$ such that $u-v \in 2L $ $(u \neq v)$.
+	\spa
+
+	$U $ symmetric $\implies -V \in U$ and $U$ convex $\implies \frac{U-V}2 \in U$, $U - V \in U$ but $U-V \in 2L$ so $\frac{U-V}2 \in L$.
+\end{proof}
+\spac
+\textbf{What does this have to do with Algebraic Number Theory?} 
+
+Want to think of $I$ (an ideal) as a lattice in some vector space. 
+Minkowski's lemma will show that $I$ contains some non-zero element of a big enough convex symmetric set. 
+Choose a convex symmetric set where we have a bound on the norm.
+
+\subsubsection{Minkowski Space}
+
+Let $k$ be an algebraic number field, we have field embeddings:
+\begin{align*}
+	\sigma_1 , \dots \sigma_r : k \hookrightarrow \R && \sigma_{r+s+i} = \bar\sigma_{r+i}\\
+	\sigma_{r+1}, \dots \sigma_{r+s} : k \hookrightarrow \C 
+\end{align*}
+\spa
+Define $k_\infty = \R^r \times \C^s$ as the Minkowski space.
+There is a map $\underline{\sigma}: k \hookrightarrow k_\infty$ by:
+\begin{align*}
+	\B \mapsto &\sigma_1(\B)\\
+	&\vdots\\
+	&\sigma_r(\B)\\
+	&\sigma_{r+1}(\B)\\
+	&\vdots\\
+	&\sigma_{r+s}(\B)
+\end{align*}
+We'll use $\underline\sigma $ to think of $k$ as a subset of $k \infty$
+
+\begin{lemma}
+Suppose $\B$ is a basis for $k$ over $\Q$.
+	Then $\underline\sigma (\B)$ is a basis for $k_\infty$ over $\R$.
+	The lattice generated by $\underline\sigma(\B)$ has covolume $2^{-s} \sqrt{|\dd \B|}$
+\end{lemma}
+\begin{proof}
+	If $s=0$ (i.e. all field embeddings are real) then this is very easy.
+	\begin{align*}
+		covol = |\det \Big( \sigma(b_1) \dots \sigma(b_d)\Big)| && \text{ for } \bba = \{ b_1, \dots, b_d\}
+	\end{align*}
+
+	Just knowing that this determinant is $\neq 0$ proves that $\sigma(b_1) , \dots , \sigma(b_d) $ is a basis so just need to prove formula for covolume.
+
+	Recall $\dd = \det(\sigma_i(b_j))^2 = (covol)^2$ as long as $s=i$.
+
+
+
+	\begin{align*}
+		covolume = |\det \begin{pmatrix}
+			\sigma_1(b_1) & \dots & \sigma_d(b_d)\\
+			\vdots && \vdots\\
+			\sigma_r(b_1) &\dots & \sigma_r(b_d)\\
+			Re (\sigma_{r+1}(b_1)) &\dots& Re(\sigma_{r+1}(b_d))\\
+			Im(\sigma_{r+1}(b_1)) &\dots& Im(\sigma_{r+1}(b_d))\\
+			\vdots && \vdots \\
+			Re (\sigma_{r+s}(b_1)) &\dots& Re(\sigma_{r+s}(b_d))\\
+			Im(\sigma_{r+s}(b_1)) &\dots& Im(\sigma_{r+s}(b_d))\\
+		\end{pmatrix}
+		|
+	\end{align*}
+	Add $i *$ row $Im (\sigma_{r+1})$ to row $Re(\sigma_{r+1})$:
+	\begin{align*}&= |\det \begin{pmatrix}
+			\sigma_1(b_1) & \dots & \sigma_d(b_d)\\
+			\vdots && \vdots\\
+			\sigma_r(b_1) &\dots & \sigma_r(b_d)\\
+			\sigma_{r+1}(b_1) &\dots& \sigma_{r+1}(b_d)\\
+			Im(\sigma_{r+1}(b_1)) &\dots& Im(\sigma_{r+1}(b_d))\\
+			\vdots && \vdots \\
+			\sigma_{r+s}(b_1) &\dots& \sigma_{r+s}(b_d)\\
+			Im(\sigma_{r+s}(b_1)) &\dots& Im(\sigma_{r+s}(b_d))\\
+	\end{pmatrix}\\[2em]
+		& = 2^{-s} |\det
+ \begin{pmatrix}
+			\sigma_1(b_1) & \dots & \sigma_d(b_d)\\
+			\vdots && \vdots\\
+			\sigma_r(b_1) &\dots & \sigma_r(b_d)\\
+			\sigma_{r+1}(b_1) &\dots& \sigma_{r+1}(b_d)\\
+			-2Im(\sigma_{r+1}(b_1)) &\dots& -2Im(\sigma_{r+1}(b_d))\\
+			\vdots && \vdots \\
+			\sigma_{r+s}(b_1) &\dots& \sigma_{r+s}(b_d)\\
+			-2Im(\sigma_{r+s}(b_1)) &\dots& -2Im(\sigma_{r+s}(b_d))\\
+		\end{pmatrix} |\\
+	& = 2^{-s} |\det
+ \begin{pmatrix}
+			\sigma_1(b_1) & \dots & \sigma_d(b_d)\\
+			\vdots && \vdots\\
+			\sigma_r(b_1) &\dots & \sigma_r(b_d)\\
+			\sigma_{r+1}(b_1) &\dots& \sigma_{r+1}(b_d)\\
+			\bar\sigma_{r+1}(b_1) &\dots& \bar\sigma_{r+1}(b_d)\\
+			\vdots && \vdots \\
+			\sigma_{r+s}(b_1) &\dots& \sigma_{r+s}(b_d)\\
+			\bar\sigma_{r+s}(b_1) &\dots& \bar\sigma_{r+s}(b_d)\\
+		\end{pmatrix} |\\
+		& = 2^{-s} \sqrt{|AB|}
+\end{align*}
+\end{proof}
+
+\begin{lemma}
+Let $I \subseteq \ring_k$ be a non-zero ideal. 
+	Then $\underline\sigma(I)$ is a lattice in $k_\infty $ with covolume $2^{-s} N(I) \sqrt{|\dd|}$, where $\dd$ is the discriminant of an integral basis.
+\end{lemma}
+
+
+
+\begin{proof}
+	Let $\bba$ be an integral basis, $\mathcal{C}$ be a $\Z-basis$ for $I$, i.e. $I = Span_\Z(\mathcal{C})$
+
+	Let $c_i = \sum m_{ij} b_j$ for $m_{ij} \in \Z$ and $M = (m_{ij})$ the transition matrix.
+	\spa
+
+	$N(I) = |\ring_k/I | = | \Z^d /M\Z^d| = |\det (M)|$
+	\spa
+
+	$\dd(\mathcal{C}) = \det(M)^2 \dd \bba = N(I)^2 \dd \bba$
+	\spa
+
+	$Covol(I) = 2^{-s} \sqrt{|\dd \mathcal{C}|} = 2^{-s} N(I) \sqrt{|\dd\bba|}$
+
+\end{proof}
+
+
+
+
+\begin{defn}
+	Let $u(a) = \{ \begin{pmatrix}
+		x_1\\
+		\dots\\
+		x_r\\
+		z_1\\
+		\dots\\
+		z_s
+	\end{pmatrix} \in k_\infty : \sum |x_i| + 2\sum|z_i| < a\}$
+\end{defn}
+
+\subsection{Messy Lemma}
+\begin{lemma}
+	$u(a)$ is convex and symmetric and $Vol(u(a)) = \cfrac{2^r (\frac{\pi}{2})^s a^d }{d!}$
+\end{lemma}
+
+
+
+\begin{proof}
+	Clearly symmetric, suppose $u = \begin{pmatrix}
+		x_1\\
+		\vdots\\
+		x_r\\
+		z_1\\
+		\vdots\\
+		z_s
+	\end{pmatrix}$ and $v' = \begin{pmatrix}
+x_1'\\
+		\vdots\\
+		x_r'\\
+		z_1'\\
+		\vdots\\
+		z_s'
+	\end{pmatrix}$
+
+	$u, v \in u(a) $ 
+
+	Let $\lambda \in (0,1)$.
+	Need to show $\lambda u + (1-\lambda) v' \in u(a) $
+	\begin{align*}
+\sum |x_i| + 2 \sum |z_i| \leq a\\
+	\end{align*}
+	\begin{align*}
+		\sum|\lambda x_i + (1-\lambda)x_i'| + 2\sum|\lambda z_i + (1-\lambda)z_i| & \leq \sum |\lambda x_i| + 2\sum|\lambda z_i| + \sum|(1-\lambda)x_i'| + 2\sum|(1-\lambda)z_i'| \\
+		& \leq \lambda (\sum |x_i| + 2\sum|z_i|) + (1-\lambda)(\sum |x_i| + 2 \sum |z_i'|)\\
+		& \leq \lambda a + (1-\lambda)a = a
+	\end{align*}
+	Therefore $u(a)$ is convex.
+
+
+
+\end{proof}
+
+\begin{lemma}
+	Let $I$ be a non-zero ideal then there exists $\B \in I$ $\B \neq 0 $ such that $|N(\B)| <M_k * N(I) $
+\end{lemma}
+\begin{proof}
+	$I$ is a lattice in $k_\infty$ with covolume $2^{-s} \sqrt{|\dd|} N(I)$, $u(a)$ is convex, symmetric with volume $\cfrac{2^r \frac{\pi}{2}^s a^d}{d!}$ as long as $Vol(u(a)) > 2^d covol(I)$, then there is a non-zero element of $I$ in $u(a)$ by Minkowski's Lemma.
+	Let's solve the inequality:
+
+	\begin{align*}
+		\frac{2^r \frac{\pi}{2}^s a^d}{d!} &> 2^d 2^{-s} \sqrt{|\dd|} N(I)\\
+		a^d &> \cfrac{2^d 2^{-s} 2^{-r} 2^{s} d!}{\pi^s} \sqrt{|\dd|} N(I)
+	\end{align*}
+
+	Since $d = r+ 2s \implies d -r =2s$, then
+
+	\begin{align*}
+		a^d > \frac{4}{\pi}^s d! \sqrt{|\dd|} N(I)
+	\end{align*}
+	If this is the case then we have an element $\B \neq 0$, $\B \in I$ such that $\B \in u(a)$
+
+
+
+	\begin{align*}
+		\sum_{i=1}^r |\sigma_i(\B) | + 2 \sum_{i=1}^s |\sigma_{r+i}(\B)| &\leq a\\
+		\sum_{i=1}^d |\sigma_i(\B)|& \leq a\\
+		\frac{1}{d} \sum |\sigma_i(\B)| &\leq \frac{a}{d} 
+	\end{align*}
+	By the AM-GM inequality, $\sqrt[d]{\prod |\sigma_i(\B)|} < \frac{a}{d}$.
+
+	Then $|N(\B)| \leq \frac{a^d}{d^d}$, so there is an element $\B \neq 0 $ in $I$ such that:
+
+	\begin{align*}
+		N(\B) \leq \underbrace{\Big(\frac{4}{\pi}\Big)^s \frac{d!}{d^d} \sqrt{|\dd|} }_{M_k}N(I) 
+	\end{align*}
+\end{proof}
+
+
+\newpage
+\center ggwp
 
 
 
